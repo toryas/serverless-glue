@@ -1,7 +1,7 @@
 {
   "name": "serverless-glue",
   "version": "1.0.0",
-  "description": "Serverless plpugin to deploy Glue Jobs",
+  "description": "Serverless plugin to deploy Glue Jobs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
