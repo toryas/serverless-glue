@@ -1,0 +1,41 @@
+{
+  "name": "serverless-glue",
+  "version": "1.0.0",
+  "description": "Serverless plpugin to deploy Glue Jobs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d lib",
+    "bp": "npm run gulp && npm pack lib/ ",
+    "gulp": "gulp clean && npm run build && gulp build",
+    "publishme": "npm run gulp && npm publish lib/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toryas/serverless-glue.git"
+  },
+  "keywords": [
+    "serverless",
+    "aws",
+    "glue",
+    "job",
+    "gluejob"
+  ],
+  "author": "Felipe Nuñez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/toryas/serverless-glue/issues"
+  },
+  "homepage": "https://github.com/toryas/serverless-glue#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-file": "^0.4.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.701.0"
+  }
+}
