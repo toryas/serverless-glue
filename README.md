@@ -23,11 +23,12 @@ Configure yours glue jobs in custom section like this:
 ```yml
 custom:
   Glue:
-    bucketDeploy: someBucket # Required 
+    bucketDeploy: someBucket # Required
+    s3Prefix: some/s3/key/location/ # optional, default = 'glueJobs/'
     jobs:
       - job:
           name: super-glue-job # Required
-          script: src/glueJobs/test-job.py # Required
+          script: src/glueJobs/test-job.py # Required script will be named with the name after '/' and uploaded to s3Prefix location
           tempDir: true # Optional true | false
           type: spark # spark / pythonshell # Required
           glueVersion: python3-2.0 # Required python3-1.0 | python3-2.0 | python2-1.0 | python2-0.9 | scala2-1.0 | scala2-0.9 | scala2-2.0 
