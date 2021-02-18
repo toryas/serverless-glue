@@ -45,11 +45,12 @@ export default class GlueHelper {
      */
     async getGlueJobs(config) {
         let arrayJobsJSON = config.jobs;
+        let s3KeyPrefix = config.s3Prefix ? config.s3Prefix : 'glueJobs/';
         let jobs = [];
         for (let job of arrayJobsJSON) {
             let _job = job.job
             let glueJob = new GlueJob(_job.name, _job.script);
-            let s3Url = await this.uploadGlueScriptToS3(_job.script, config.bucketDeploy, 'glueJobs/');
+            let s3Url = await this.uploadGlueScriptToS3(_job.script, config.bucketDeploy, s3KeyPrefix);
             glueJob.setS3ScriptLocation(s3Url);
             glueJob.setGlueVersion(_job.glueVersion);
             glueJob.setRole(_job.role);
