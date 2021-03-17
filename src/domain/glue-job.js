@@ -9,11 +9,11 @@ export default class GlueJob {
     }
 
     setCommandName(commandName) {
-        switch(commandName){
-            case 'spark' : this.commandName = 'glueetl'
-            break;
-            case 'pythonshell':this.commandName = 'pythonshell'
-            break;
+        switch (commandName) {
+            case 'spark': this.commandName = 'glueetl'
+                break;
+            case 'pythonshell': this.commandName = 'pythonshell'
+                break;
         }
     }
 
@@ -31,27 +31,27 @@ export default class GlueJob {
         this.role = role
     }
 
-    setType(type){
+    setType(type) {
         this.type = type;
     }
 
-    setMaxConcurrentRuns(maxConcurrentRuns){
+    setMaxConcurrentRuns(maxConcurrentRuns) {
         this.maxConcurrentRuns = maxConcurrentRuns;
     }
 
-    setWorkerType(workerType){
+    setWorkerType(workerType) {
         this.WorkerType = workerType;
     }
 
-    setNumberOfWorkers(numberOfWorkers){
+    setNumberOfWorkers(numberOfWorkers) {
         this.NumberOfWorkers = numberOfWorkers
     }
 
-    setTempDir(tmpDir){
+    setTempDir(tmpDir) {
         this.tmpDir = tmpDir;
     }
 
-    setOnlyPropertiesSpark(cfn){
+    setOnlyPropertiesSpark(cfn) {
         if (this.commandName === 'glueetl') {
             cfn.Properties.WorkerType = (this.WorkerType) ? this.WorkerType : 'Standar';
             cfn.Properties.NumberOfWorkers = (this.NumberOfWorkers) ? this.NumberOfWorkers : '';
@@ -79,18 +79,6 @@ export default class GlueJob {
                     "--job-language": this.language,
                     "--TempDir": this.tmpDir || ""
                 },
-
-                // AllocatedCapacity: Double,
-                // "Connections": ConnectionsList,
-                //"Description": String,
-                // "LogUri": String,
-                // "MaxCapacity": Double,
-                // "MaxRetries": Double,
-                // "NotificationProperty": NotificationProperty,
-                // "SecurityConfiguration": String,
-                // "Tags": Json,
-                // "Timeout": Integer,
-
             }
         };
 
