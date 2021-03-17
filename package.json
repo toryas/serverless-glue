@@ -21,7 +21,11 @@
     "job",
     "gluejob"
   ],
-  "author": "Felipe Nuñez",
+  "author": {
+    "name": "Felipe Nuñez",
+    "email": "toutox@gmail.com",
+    "url": "https://github.com/toryas"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/toryas/serverless-glue/issues"
