@@ -51,9 +51,17 @@ export default class GlueJob {
         this.tmpDir = tmpDir;
     }
 
+    setOnlyPropertiesSpark(cfn){
+        if (this.commandName === 'glueetl') {
+            cfn.Properties.WorkerType = (this.WorkerType) ? this.WorkerType : 'Standar';
+            cfn.Properties.NumberOfWorkers = (this.NumberOfWorkers) ? this.NumberOfWorkers : '';
+        }
+
+        return cfn;
+    }
 
     getCFGlueJob() {
-        return {
+        let cfn = {
             Type: "AWS::Glue::Job",
             Properties: {
                 Command: {
@@ -67,13 +75,11 @@ export default class GlueJob {
                 "ExecutionProperty": {
                     "MaxConcurrentRuns": this.maxConcurrentRuns || 1
                 },
-                "WorkerType": this.WorkerType || "Standar",
-                "NumberOfWorkers": this.NumberOfWorkers || "",
                 "DefaultArguments": {
                     "--job-language": this.language,
                     "--TempDir": this.tmpDir || ""
                 },
-                
+
                 // AllocatedCapacity: Double,
                 // "Connections": ConnectionsList,
                 //"Description": String,
@@ -84,10 +90,13 @@ export default class GlueJob {
                 // "SecurityConfiguration": String,
                 // "Tags": Json,
                 // "Timeout": Integer,
+
             }
-        }
+        };
+
+        cfn = this.setOnlyPropertiesSpark(cfn);
+
+        return cfn;
     }
-
-
 
 }
