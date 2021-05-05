@@ -65,6 +65,9 @@ export default class GlueHelper {
             if (_job.NumberOfWorkers) {
                 glueJob.setNumberOfWorkers(_job.NumberOfWorkers)
             }
+            if (_job.DefaultArguments) {
+                glueJob.setDefaultArguments(_job.DefaultArguments)
+            }
             if (_job.tempDir) {
                 console.log("Cambiando a true");
                 this.tempDir = true;

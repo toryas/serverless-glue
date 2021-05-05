@@ -72,6 +72,7 @@ custom:
 |MaxConcurrentRuns|Double|max concurrent runs of the job|false|
 |WorkerType|String|worker type, default value if you dont indicate is `Standar`|false|
 |NumberOfWorkers|Integer|number of workers|false|
+|DefaultArguments|Map|default job arguments|false|
 
 
 ## And now?...
