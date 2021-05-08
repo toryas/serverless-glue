@@ -70,7 +70,7 @@ custom:
 |glueVersion|String|Indicate language and glue version to use ( `[language][version]-[glue version]`) the value can you use are: <ul><li>python3-1.0</li><li>python3-2.0</li><li>python2-1.0</li><li>python2-0.9</li><li>scala2-1.0</li><li>scala2-0.9</li><li>scala2-2.0</li></ul>|true|
 |role|String| arn role to execute job|true|
 |MaxConcurrentRuns|Double|max concurrent runs of the job|false|
-|WorkerType|String|worker type, default value if you dont indicate is `Standart`|false|
+|WorkerType|String|The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.|false|
 |NumberOfWorkers|Integer|number of workers|false|
 
 
