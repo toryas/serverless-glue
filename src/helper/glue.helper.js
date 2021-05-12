@@ -41,11 +41,15 @@ export default class GlueHelper {
 
     /**
      * Get GlueJobs configured in serverless.yml
-     * @param {Object} config plugin config 
+     * @param {Object} config plugin config
      */
     async getGlueJobs(config) {
         let arrayJobsJSON = config.jobs;
         let s3KeyPrefix = config.s3Prefix ? config.s3Prefix : 'glueJobs/';
+
+        let tempDirBucket = config.tempDirBucket;
+        let tempDirS3Prefix = config.tempDirS3Prefix;
+
         let jobs = [];
         for (let job of arrayJobsJSON) {
             let _job = job.job
@@ -68,14 +72,22 @@ export default class GlueHelper {
             if (_job.tempDir) {
                 console.log("Cambiando a true");
                 this.tempDir = true;
+
+                // use the provided temp dir bucket if configured
+                let jobTempDirBucket = tempDirBucket || {"Ref" : "GlueJobTempBucket"};
+
+                // use the provided s3 prefix if configured
+                let jobTempDirS3Prefix = "";
+                if (tempDirS3Prefix) {
+                    jobTempDirS3Prefix += `/${tempDirS3Prefix}`
+                }
+                jobTempDirS3Prefix += `/${_job.name}`;
+
                 glueJob.setTempDir({"Fn::Join": [
-                    "",[
-                        "s3://",
-                        {"Ref" : "GlueJobTempBucket"},
-                        `/${_job.name}`
-                    ]
-                ]})
+                        "",["s3://", jobTempDirBucket, jobTempDirS3Prefix]
+                    ]})
             }
+
             jobs.push(glueJob);
         }
         return jobs;
@@ -93,8 +105,8 @@ export default class GlueHelper {
         for (let job of jobs) {
             template[toPascalCase(job.name)] = job.getCFGlueJob();
         }
-        
-        if (this.tempDir) {
+
+        if (this.tempDir && !config.tempDirBucket) {
             this.serverless.cli.log("Building S3 Temp Bucket CloudFormation");
             let tempBucket = {
                 "Type": "AWS::S3::Bucket",
