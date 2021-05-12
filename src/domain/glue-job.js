@@ -53,8 +53,12 @@ export default class GlueJob {
 
     setOnlyPropertiesSpark(cfn) {
         if (this.commandName === 'glueetl') {
-            cfn.Properties.WorkerType = (this.WorkerType) ? this.WorkerType : 'Standar';
-            cfn.Properties.NumberOfWorkers = (this.NumberOfWorkers) ? this.NumberOfWorkers : '';
+            if (this.WorkerType) {
+                cfn.Properties.WorkerType = this.WorkerType
+            }
+            if (this.NumberOfWorkers) {
+                cfn.Properties.NumberOfWorkers = this.NumberOfWorkers
+            }
         }
 
         return cfn;
