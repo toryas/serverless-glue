@@ -36,6 +36,20 @@ custom:
           MaxConcurrentRuns: 3 # Optional
           WorkerType: Standard  # Optional  | Standard  | G1.X | G2.X
           NumberOfWorkers: 1 # Optional
+    triggers:
+      - trigger:
+          name: some-trigger-name # Required
+          schedule: 30 12 * * ? * # Optional, CRON expression. The trigger will be created with On-Demand type if the schedule is not provided.
+          jobs: # Required. One or more jobs to trigger
+            - job:
+                name: super-glue-job # Required
+                args: # optional
+                  --arg1: value1
+                  --arg2: value2
+                timeout: 30 # optional
+            - job:
+                name: another-glue-job
+
 ```
 
 you can define a lot of jobs..
@@ -48,6 +62,19 @@ custom:
         - job:
             ...
         - job:
+            ...
+
+```
+
+And a lot of triggers..
+
+```yml
+custom:
+    Glue:
+    triggers:
+        - trigger:
+            ...
+        - trigger:
             ...
 
 ```
@@ -72,6 +99,24 @@ custom:
 |MaxConcurrentRuns|Double|max concurrent runs of the job|false|
 |WorkerType|String|worker type, default value if you dont indicate is `Standar`|false|
 |NumberOfWorkers|Integer|number of workers|false|
+
+### Triggers configuration parameters
+
+|Parameter|Type|Description|Required|
+|-|-|-|-|
+|name|String|name of the trigger|true|
+|schedule|String|CRON expression|false|
+|jobs|Array|An array of jobs to trigger|true|
+
+Only On-Demand and Scheduled triggers are supported.
+
+### Trigger job configuration parameters
+
+|Parameter|Type|Description|Required|
+|-|-|-|-|
+|name|String|The name of the Glue job to trigger|true|
+|timeout|Integer|Job execution timeout|false|
+|args|Map|job arguments|false|
 
 
 ## And now?...
