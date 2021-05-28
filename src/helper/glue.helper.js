@@ -2,6 +2,8 @@ import { makeS3service } from "../util/aws.util";
 import { getAWSCredentials } from "../util/serverless.util";
 import { readFileSync } from 'fs'
 import GlueJob from "../domain/glue-job";
+import GlueTrigger from "../domain/glue-trigger";
+import GlueTriggerAction from "../domain/glue-trigger-action";
 import { toPascalCase } from '../util/string.util'
 
 export default class GlueHelper {
@@ -41,7 +43,7 @@ export default class GlueHelper {
 
     /**
      * Get GlueJobs configured in serverless.yml
-     * @param {Object} config plugin config 
+     * @param {Object} config plugin config
      */
     async getGlueJobs(config) {
         let arrayJobsJSON = config.jobs;
@@ -81,19 +83,51 @@ export default class GlueHelper {
         return jobs;
     }
 
+    /**
+     * Get GlueJobTriggers configured in serverless.yml
+     * @param {Object} config plugin config
+     */
+    async getGlueTriggers(config) {
+        let arrayTriggersJSON = config.triggers;
 
+        let triggers = [];
+        for (let trigger of arrayTriggersJSON) {
+            let _trigger = trigger.trigger;
+            let glueTrigger = new GlueTrigger(_trigger.name, _trigger.schedule);
+            let glueTriggerActions = []
+            for (let job of _trigger.jobs) {
+                let _job = job.job;
+                const triggerAction = new GlueTriggerAction(_job.name);
+                if (_job.args) {
+                    triggerAction.setArguments(_job.args);
+                }
+                if (_job.timeout) {
+                    triggerAction.setTimeout(_job.timeout);
+                }
+                glueTriggerActions.push(triggerAction);
+            }
+            glueTrigger.setActions(glueTriggerActions);
+            triggers.push(glueTrigger);
+        }
+        return triggers;
+    }
 
     async run() {
         let config = this.getPluginConfig();
 
         let jobs = await this.getGlueJobs(config);
+        let triggers = await this.getGlueTriggers(config);
+
         let template = this.serverless.service.provider.compiledCloudFormationTemplate.Resources;
         let outputs = this.serverless.service.provider.compiledCloudFormationTemplate.Outputs;
         this.serverless.cli.log("Building GlueJobs CloudFormation");
         for (let job of jobs) {
             template[toPascalCase(job.name)] = job.getCFGlueJob();
         }
-        
+        for (let trigger of triggers) {
+            template[toPascalCase(trigger.name)] = trigger.getCFGlueTrigger();
+        }
+
         if (this.tempDir) {
             this.serverless.cli.log("Building S3 Temp Bucket CloudFormation");
             let tempBucket = {
