@@ -51,6 +51,10 @@ export default class GlueJob {
         this.tmpDir = tmpDir;
     }
 
+    setDefaultArguments(defaultArguments) {
+        this.defaultArguments = defaultArguments;
+    }
+
     setOnlyPropertiesSpark(cfn) {
         if (this.commandName === 'glueetl') {
             if (this.WorkerType) {
@@ -81,7 +85,8 @@ export default class GlueJob {
                 },
                 "DefaultArguments": {
                     "--job-language": this.language,
-                    "--TempDir": this.tmpDir || ""
+                    "--TempDir": this.tmpDir || "",
+                    ...this.defaultArguments,
                 },
             }
         };

@@ -99,6 +99,7 @@ custom:
 |MaxConcurrentRuns|Double|max concurrent runs of the job|false|
 |WorkerType|String|The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.|false|
 |NumberOfWorkers|Integer|number of workers|false|
+|DefaultArguments|Map|default job arguments|false|
 
 ### Triggers configuration parameters
 
