@@ -25,6 +25,8 @@ custom:
   Glue:
     bucketDeploy: someBucket # Required
     s3Prefix: some/s3/key/location/ # optional, default = 'glueJobs/'
+    tempDirBucket: someBucket # optional, default = '{serverless.serviceName}-{provider.stage}-gluejobstemp' 
+    tempDirS3Prefix: some/s3/key/location/ # optional, default = ''. The job name will be appended to the prefix name
     jobs:
       - job:
           name: super-glue-job # Required
@@ -84,6 +86,9 @@ custom:
 |Parameter|Type|Description|Required|
 |-|-|-|-|
 |bucketDeploy|String|S3 Bucket name|true|
+|s3Prefix|String|S3 prefix name|false|
+|tempDirBucket|String|S3 Bucket name for Glue temporary directory. If dont pass argument the bucket'name will generates with pattern {serverless.serviceName}-{provider.stage}-gluejobstemp|false|
+|tempDirS3Prefix|String|S3 prefix name for Glue temporary directory|false|
 |jobs|Array|Array of glue jobs to deploy|true|
 
 ### Jobs configurations parameters
