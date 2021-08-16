@@ -88,28 +88,33 @@ export default class GlueHelper {
      * @param {Object} config plugin config
      */
     async getGlueTriggers(config) {
-        let arrayTriggersJSON = config.triggers;
-
         let triggers = [];
-        for (let trigger of arrayTriggersJSON) {
-            let _trigger = trigger.trigger;
-            let glueTrigger = new GlueTrigger(_trigger.name, _trigger.schedule);
-            let glueTriggerActions = []
-            for (let job of _trigger.jobs) {
-                let _job = job.job;
-                const triggerAction = new GlueTriggerAction(_job.name);
-                if (_job.args) {
-                    triggerAction.setArguments(_job.args);
+        try{
+            let arrayTriggersJSON = config.triggers;
+    
+            for (let trigger of arrayTriggersJSON) {
+                let _trigger = trigger.trigger;
+                let glueTrigger = new GlueTrigger(_trigger.name, _trigger.schedule);
+                let glueTriggerActions = []
+                for (let job of _trigger.jobs) {
+                    let _job = job.job;
+                    const triggerAction = new GlueTriggerAction(_job.name);
+                    if (_job.args) {
+                        triggerAction.setArguments(_job.args);
+                    }
+                    if (_job.timeout) {
+                        triggerAction.setTimeout(_job.timeout);
+                    }
+                    glueTriggerActions.push(triggerAction);
                 }
-                if (_job.timeout) {
-                    triggerAction.setTimeout(_job.timeout);
-                }
-                glueTriggerActions.push(triggerAction);
+                glueTrigger.setActions(glueTriggerActions);
+                triggers.push(glueTrigger);
             }
-            glueTrigger.setActions(glueTriggerActions);
-            triggers.push(glueTrigger);
+        }catch(err){
+            console.log(`No Trigger configuration`);
+        }finally{
+            return triggers;
         }
-        return triggers;
     }
 
     async run() {
