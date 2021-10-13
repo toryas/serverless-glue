@@ -51,6 +51,10 @@ export default class GlueJob {
         this.tmpDir = tmpDir;
     }
 
+    setConnections(connections) {
+        this.connections = connections;
+    }
+
     setOnlyPropertiesSpark(cfn) {
         if (this.commandName === 'glueetl') {
             if (this.WorkerType) {
@@ -73,6 +77,7 @@ export default class GlueJob {
                     "PythonVersion": this.pythonVersion,
                     "ScriptLocation": this.s3ScriptLocation
                 },
+                "Connections": this.connections,
                 "GlueVersion": this.glueVersion,
                 "Name": this.name,
                 "Role": this.role,
