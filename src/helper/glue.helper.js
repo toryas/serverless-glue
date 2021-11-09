@@ -19,7 +19,7 @@ export default class GlueHelper {
      * @param {*} bucket bucket name
      * @param {*} keyPath key path in S3 Bucket
      */
-    async uploadGlueScriptToS3(fileScriptPath, bucket, keyPath = '') {
+    async uploadGlueScriptToS3(fileScriptPath, bucket, createBucket, keyPath = '') {
 
         let credentials = getAWSCredentials(this.serverless)
         let s3Service = makeS3service(credentials);
@@ -27,10 +27,26 @@ export default class GlueHelper {
         let fileName = fileScriptPath.split('/').pop();
 
         let params = {
+            Bucket: bucket
+        }
+
+        if (createBucket) {
+            try {
+                await s3Service.createBucket(params).promise();
+            } catch (error) {
+                if (!error.statuCode === 409) {
+                    throw error;
+                }
+            }
+        }
+
+
+        let params = {
+            ...params,
             Body: readFileSync(`./${fileScriptPath}`),
-            Bucket: bucket,
             Key: `${keyPath}${fileName}`
         }
+
         this.serverless.cli.log("Upload GlueJob Script to Bucket...");
         await s3Service.upload(params).promise();
         this.serverless.cli.log("Upload GlueJob Script to Bucket Done...");
@@ -56,7 +72,7 @@ export default class GlueHelper {
         for (let job of arrayJobsJSON) {
             let _job = job.job
             let glueJob = new GlueJob(_job.name, _job.script);
-            let s3Url = await this.uploadGlueScriptToS3(_job.script, config.bucketDeploy, s3KeyPrefix);
+            let s3Url = await this.uploadGlueScriptToS3(_job.script, config.bucketDeploy, config.createBucket, s3KeyPrefix);
             glueJob.setS3ScriptLocation(s3Url);
             glueJob.setGlueVersion(_job.glueVersion);
             glueJob.setRole(_job.role);
@@ -75,7 +91,7 @@ export default class GlueHelper {
                 this.tempDir = true;
 
                 // use the provided temp dir bucket if configured
-                let jobTempDirBucket = tempDirBucket || {"Ref" : "GlueJobTempBucket"};
+                let jobTempDirBucket = tempDirBucket || { "Ref": "GlueJobTempBucket" };
 
                 // use the provided s3 prefix if configured
                 let jobTempDirS3Prefix = "";
@@ -84,9 +100,11 @@ export default class GlueHelper {
                 }
                 jobTempDirS3Prefix += `/${_job.name}`;
 
-                glueJob.setTempDir({"Fn::Join": [
-                        "",["s3://", jobTempDirBucket, jobTempDirS3Prefix]
-                    ]})
+                glueJob.setTempDir({
+                    "Fn::Join": [
+                        "", ["s3://", jobTempDirBucket, jobTempDirS3Prefix]
+                    ]
+                })
             }
 
             jobs.push(glueJob);
@@ -100,9 +118,9 @@ export default class GlueHelper {
      */
     async getGlueTriggers(config) {
         let triggers = [];
-        try{
+        try {
             let arrayTriggersJSON = config.triggers;
-    
+
             for (let trigger of arrayTriggersJSON) {
                 let _trigger = trigger.trigger;
                 let glueTrigger = new GlueTrigger(_trigger.name, _trigger.schedule);
@@ -121,9 +139,9 @@ export default class GlueHelper {
                 glueTrigger.setActions(glueTriggerActions);
                 triggers.push(glueTrigger);
             }
-        }catch(err){
+        } catch (err) {
             console.log(`No Trigger configuration`);
-        }finally{
+        } finally {
             return triggers;
         }
     }
