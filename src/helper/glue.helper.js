@@ -29,13 +29,9 @@ export default class GlueHelper {
 
     let fileName = fileScriptPath.split("/").pop();
 
-    let params = {
-      Bucket: bucket,
-    };
-
     if (createBucket) {
       try {
-        await s3Service.createBucket(params).promise();
+        await s3Service.createBucket({ Bucket: bucket }).promise();
       } catch (error) {
         if (!error.statuCode === 409) {
           throw error;
@@ -44,7 +40,7 @@ export default class GlueHelper {
     }
 
     let params = {
-      ...params,
+      Bucket: bucket,
       Body: readFileSync(`./${fileScriptPath}`),
       Key: `${keyPath}${fileName}`,
     };
