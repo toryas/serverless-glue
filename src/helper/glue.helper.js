@@ -71,6 +71,9 @@ export default class GlueHelper {
             if (_job.NumberOfWorkers) {
                 glueJob.setNumberOfWorkers(_job.NumberOfWorkers)
             }
+            if (_job.Connections) {
+                glueJob.setConnections(_job.Connections)
+            }
             if (_job.tempDir) {
                 this.tempDir = true;
 

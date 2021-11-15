@@ -38,6 +38,8 @@ custom:
           MaxConcurrentRuns: 3 # Optional
           WorkerType: Standard  # Optional  | Standard  | G1.X | G2.X
           NumberOfWorkers: 1 # Optional
+          Connections: # Optional
+            - someConnection
     triggers:
       - trigger:
           name: some-trigger-name # Required
@@ -104,6 +106,7 @@ custom:
 |MaxConcurrentRuns|Double|max concurrent runs of the job|false|
 |WorkerType|String|The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.|false|
 |NumberOfWorkers|Integer|number of workers|false|
+|Connections|List|a list of connections used by the job|false|
 
 ### Triggers configuration parameters
 
