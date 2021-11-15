@@ -2,7 +2,7 @@
 
 This is a plugin for Serverless framework that provide the posibliti to deploy AWS Glue Jobs
 
-## Install 
+## Install
 
 1. run `npm install --save-dev serverless-glue`
 2. add **serverless-glue** in serverless.yml plugin section
@@ -24,16 +24,17 @@ Configure yours glue jobs in custom section like this:
 custom:
   Glue:
     bucketDeploy: someBucket # Required
-    s3Prefix: some/s3/key/location/ # optional, default = 'glueJobs/'
-    tempDirBucket: someBucket # optional, default = '{serverless.serviceName}-{provider.stage}-gluejobstemp' 
-    tempDirS3Prefix: some/s3/key/location/ # optional, default = ''. The job name will be appended to the prefix name
+    createBucket: true # Optional true | false. Create a bucket named as bucketDeploy before upload the script.
+    s3Prefix: some/s3/key/location/ # Optional, default = 'glueJobs/'
+    tempDirBucket: someBucket # Optional, default = '{serverless.serviceName}-{provider.stage}-gluejobstemp'
+    tempDirS3Prefix: some/s3/key/location/ # Optional, default = ''. The job name will be appended to the prefix name
     jobs:
       - job:
           name: super-glue-job # Required
           script: src/glueJobs/test-job.py # Required script will be named with the name after '/' and uploaded to s3Prefix location
           tempDir: true # Optional true | false
-          type: spark # spark / pythonshell # Required
-          glueVersion: python3-2.0 # Required python3-1.0 | python3-2.0 | python2-1.0 | python2-0.9 | scala2-1.0 | scala2-0.9 | scala2-2.0 
+          type: spark # Required spark | pythonshell
+          glueVersion: python3-2.0 # Required python3-1.0 | python3-2.0 | python2-1.0 | python2-0.9 | scala2-1.0 | scala2-0.9 | scala2-2.0
           role: arn:aws:iam::000000000:role/someRole # Required
           MaxConcurrentRuns: 3 # Optional
           WorkerType: Standard  # Optional  | Standard  | G1.X | G2.X
@@ -47,13 +48,12 @@ custom:
           jobs: # Required. One or more jobs to trigger
             - job:
                 name: super-glue-job # Required
-                args: # optional
+                args: # Optional
                   --arg1: value1
                   --arg2: value2
-                timeout: 30 # optional
+                timeout: 30 # Optional
             - job:
                 name: another-glue-job
-
 ```
 
 you can define a lot of jobs..
@@ -88,6 +88,7 @@ custom:
 |Parameter|Type|Description|Required|
 |-|-|-|-|
 |bucketDeploy|String|S3 Bucket name|true|
+|createBucket|String|If true, a bucket named as `bucketDeploy` will be created before. Helpful if you have not created the bucket first|false|
 |s3Prefix|String|S3 prefix name|false|
 |tempDirBucket|String|S3 Bucket name for Glue temporary directory. If dont pass argument the bucket'name will generates with pattern {serverless.serviceName}-{provider.stage}-gluejobstemp|false|
 |tempDirS3Prefix|String|S3 prefix name for Glue temporary directory|false|
