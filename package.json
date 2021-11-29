@@ -1,11 +1,11 @@
 {
   "name": "serverless-glue",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "Serverless plugin to deploy Glue Jobs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src -d lib",
+    "build": "tsc",
     "bp": "npm run gulp && npm pack lib/ ",
     "gulp": "gulp clean && npm run build && gulp build",
     "publishme": "npm run gulp && npm publish lib/"
@@ -42,6 +42,7 @@
     "gulp-file": "^0.4.0"
   },
   "dependencies": {
-    "aws-sdk": "^2.701.0"
+    "aws-sdk": "^2.701.0",
+    "typescript": "^4.4.4"
   }
 }
