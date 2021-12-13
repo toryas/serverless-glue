@@ -17,5 +17,6 @@ export interface GlueJobInterface {
   NumberOfWorkers?: number;
   Connections?: string[];
   scriptS3Location?:string;
-  commandName?:'glueetl' | 'pythonshell'
+  commandName?:'glueetl' | 'pythonshell';
+  DefaultArguments?: Map<string,string>;
 }

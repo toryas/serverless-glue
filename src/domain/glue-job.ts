@@ -24,6 +24,7 @@ export class GlueJob implements GlueJobInterface {
   pythonVersion?: string;
   language?: string;
   glueVersionJob?: string;
+  DefaultArguments?: Map<string,string>
 
   constructor(job: GlueJobInterface) {
     this.name = job.name;
@@ -35,6 +36,7 @@ export class GlueJob implements GlueJobInterface {
     this.WorkerType = job.WorkerType;
     this.NumberOfWorkers = job.NumberOfWorkers;
     this.Connections = job.Connections;
+    this.DefaultArguments = job.DefaultArguments;
     this.defineCommandName(job.type);
     this.setGlueVersion(this.glueVersion);
   }
