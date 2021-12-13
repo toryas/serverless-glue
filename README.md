@@ -7,6 +7,19 @@ I set out to revive this project by refactoring the code, to keep it clean and e
 
 The principal changes are:
 
+
+
+## [2.0.2] - 2021-12-13
+
+### Fixed
+- Replace incorrect async loop in serverless service.
+
+### Changed
+- Move typescript dependencie to dev
+## [2.0.1] - 2021-12-09
+
+### Changed
+- Move typescript dependencie to dev
 ## [2.0.0] - 2021-11-29
 ### Changed
 - Refactoring code from JS to TS, and restructured folders.
