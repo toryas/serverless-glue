@@ -47,15 +47,16 @@ export class ServerlessService {
       };
       await this.awsHelper.createBucket(params);
     }
-    jobs.forEach(async (job: GlueJob) => {
+
+    for(const job of jobs) {
       await this.uploadJobScripts(job);
       const jobCFTemplate = CloudFormationUtils.glueJobToCF(job);
       this.helperless.appendToTemplate(
-        "resources",
-        StringUtils.toPascalCase(job.name),
-        jobCFTemplate
+          "resources",
+          StringUtils.toPascalCase(job.name),
+          jobCFTemplate
       );
-    });
+    }
 
     if (
       jobs.filter((e) => e.tempDirRef == true).length > 0 &&
