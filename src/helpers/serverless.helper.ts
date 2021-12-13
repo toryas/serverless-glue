@@ -11,8 +11,7 @@ export class ServerlessHelper {
   }
 
   getPluginConfig(): GluePluginConfigInterface {
-    return this.serverless.configSchemaHandler.serverless.configurationInput
-      .Glue;
+    return this.serverless.configSchemaHandler.serverless.configurationInput.custom.Glue;
   }
 
   appendToTemplate(
