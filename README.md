@@ -12,10 +12,8 @@ The principal changes are:
 ## [2.0.2] - 2021-12-13
 
 ### Fixed
-- Replace incorrect async loop in serverless service.
+- Replace incorrect async loop in serverless
 
-### Changed
-- Move typescript dependencie to dev
 ## [2.0.1] - 2021-12-09
 
 ### Changed
@@ -53,7 +51,7 @@ So any glue-job deployed with this plugin is part of your stack too.
 
 ## How configure your GlueJobs
 
-Configure yours glue jobs in custom section like this:
+Configure yours glue jobs in the root of servelress.yml like this:
 
 ```yml
 Glue:
