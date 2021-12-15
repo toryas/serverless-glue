@@ -9,6 +9,10 @@ The principal changes are:
 
 
 
+## [2.1.0] - 2021-12-15
+
+### Add
+- Implement DefaultArguments for jobs
 ## [2.0.2] - 2021-12-13
 
 ### Fixed
@@ -72,6 +76,28 @@ Glue:
       Connections: # Optional
         - some-conection-string
         - other-conection-string
+      DefaultArguments: # Optional
+        class: string # Optional
+        scriptLocation: string # Optional
+        extraPyFiles: string # Optional
+        extraJars: string # Optional
+        userJarsFirst: string # Optional
+        usePostgresDriver: string # Optional
+        extraFiles: string # Optional
+        disableProxy: string # Optional
+        jobBookmarkOption: string # Optional
+        enableAutoScaling: string # Optional
+        enableS3ParquetOptimizedCommitter: string # Optional
+        enableRenameAlgorithmV2: string # Optional
+        enableGlueDatacatalog: string # Optional
+        enableMetrics: string # Optional
+        enableContinuousCloudwatchLog: string # Optional
+        enableContinuousLogFilter: string # Optional
+        continuousLogLogGroup: string # Optional
+        continuousLogLogStreamPrefix: string # Optional
+        continuousLogConversionPattern: string # Optional
+        enableSparkUi: string # Optional
+        sparkEventLogsPath: string # Optional
   triggers:
     - name: some-trigger-name # Required
       schedule: 30 12 * * ? * # Optional, CRON expression. The trigger will be created with On-Demand type if the schedule is not provided.
@@ -136,6 +162,7 @@ And a lot of triggers..
 |WorkerType|String|The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.|false|
 |NumberOfWorkers|Integer|number of workers|false|
 |Connections|List|a list of connections used by the job|false|
+|DefaultArguments|object|Special Parameters Used by AWS Glue for mor information see this read the [AWS documentation](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)|false|
 
 ### Triggers configuration parameters
 
