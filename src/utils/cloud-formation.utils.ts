@@ -4,7 +4,6 @@ import { GlueTriggerActionInterface } from "../interfaces/glue-trigger-action.in
 
 export class CloudFormationUtils {
   static glueJobToCF(glueJob: GlueJob) {
-    console.log(JSON.stringify(glueJob,null,2))
     let cfn: { [k: string]: any } = {
       Type: "AWS::Glue::Job",
       Properties: {
