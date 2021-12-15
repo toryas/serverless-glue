@@ -4,6 +4,7 @@ import { GlueTriggerActionInterface } from "../interfaces/glue-trigger-action.in
 
 export class CloudFormationUtils {
   static glueJobToCF(glueJob: GlueJob) {
+    console.log(JSON.stringify(glueJob,null,2))
     let cfn: { [k: string]: any } = {
       Type: "AWS::Glue::Job",
       Properties: {
@@ -22,8 +23,29 @@ export class CloudFormationUtils {
           MaxConcurrentRuns: glueJob.MaxConcurrentRuns ?? 1,
         },
         DefaultArguments: {
-          "--job-language": glueJob.language,
-          "--TempDir": glueJob.tempDirRef || "",
+          "--job-language": glueJob.DefaultArguments?.jobLanguage,
+          "--TempDir": glueJob.DefaultArguments?.tempDir ?? "",
+          "--class": glueJob.DefaultArguments?.class,
+          "--scriptLocation": glueJob.DefaultArguments?.scriptLocation,
+          "--extra-py-files": glueJob.DefaultArguments?.extraPyFiles,
+          "--extra-jars": glueJob.DefaultArguments?.extraJars,
+          "--user-jars-first": glueJob.DefaultArguments?.userJarsFirst,
+          "--use-postgres-driver": glueJob.DefaultArguments?.usePostgresDriver,
+          "--extra-files": glueJob.DefaultArguments?.extraFiles,
+          "--disable-proxy": glueJob.DefaultArguments?.disableProxy,
+          "--job-bookmark-option": glueJob.DefaultArguments?.jobBookmarkOption,
+          "--enable-auto-scaling": glueJob.DefaultArguments?.enableAutoScaling,
+          "--enable-s3-parquet-optimized-committer": glueJob.DefaultArguments?.enableS3ParquetOptimizedCommitter,
+          "--enable-rename-algorithm-v2": glueJob.DefaultArguments?.enableRenameAlgorithmV2,
+          "--enable-glue-datacatalog": glueJob.DefaultArguments?.enableGlueDatacatalog,
+          "--enable-metrics": glueJob.DefaultArguments?.enableMetrics,
+          "--enable-continuous-cloudwatch-log": glueJob.DefaultArguments?.enableContinuousCloudwatchLog,
+          "--enable-continuous-log-filter": glueJob.DefaultArguments?.enableContinuousLogFilter,
+          "--continuous-log-logGroup": glueJob.DefaultArguments?.continuousLogLogGroup,
+          "--continuous-log-logStreamPrefix": glueJob.DefaultArguments?.continuousLogLogStreamPrefix,
+          "--continuous-log-conversionPattern": glueJob.DefaultArguments?.continuousLogConversionPattern,
+          "--enable-spark-ui": glueJob.DefaultArguments?.enableSparkUi,
+          "--spark-event-logs-path": glueJob.DefaultArguments?.sparkEventLogsPath,
         },
       },
     };

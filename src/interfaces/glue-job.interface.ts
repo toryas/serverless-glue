@@ -1,3 +1,5 @@
+import { DefaultArgumentsInterface } from "./default-arguments.interface";
+
 export interface GlueJobInterface {
   name: string;
   scriptPath: string;
@@ -16,6 +18,7 @@ export interface GlueJobInterface {
   WorkerType?: "Standard" | "G1.X" | "G2.X";
   NumberOfWorkers?: number;
   Connections?: string[];
-  scriptS3Location?:string;
-  commandName?:'glueetl' | 'pythonshell'
+  scriptS3Location?: string;
+  commandName?: "glueetl" | "pythonshell";
+  DefaultArguments: DefaultArgumentsInterface;
 }

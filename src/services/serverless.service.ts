@@ -59,7 +59,7 @@ export class ServerlessService {
     }
 
     if (
-      jobs.filter((e) => e.tempDirRef == true).length > 0 &&
+      jobs.filter((e) => e.tempDir).length > 0 &&
       !this.config?.tempDirBucket
     ) {
       const bucketTemplate = CloudFormationUtils.generateBucketTemplate(

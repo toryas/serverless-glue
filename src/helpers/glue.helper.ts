@@ -34,7 +34,7 @@ export class GlueHelper {
     }
     jobTempDirS3Prefix += `/${glueJob.name}`;
 
-    glueJob.tempDirRef = {
+    glueJob.DefaultArguments.tempDir = {
       "Fn::Join": ["", ["s3://", jobTempDirBucket, jobTempDirS3Prefix]],
     };
   }

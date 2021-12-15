@@ -1,10 +1,10 @@
+import { DefaultArgumentsInterface } from "../interfaces/default-arguments.interface";
 import { GlueJobInterface } from "../interfaces/glue-job.interface";
 
 export class GlueJob implements GlueJobInterface {
   name: string;
   scriptPath: string;
   tempDir?: boolean;
-  tempDirRef?: any;
   type: "spark" | "pythonshell";
   glueVersion:
     | "python3-1.0"
@@ -22,10 +22,11 @@ export class GlueJob implements GlueJobInterface {
   scriptS3Location?: string;
   commandName?: "glueetl" | "pythonshell";
   pythonVersion?: string;
-  language?: string;
   glueVersionJob?: string;
+  DefaultArguments: DefaultArgumentsInterface;
 
   constructor(job: GlueJobInterface) {
+    this.DefaultArguments = job.DefaultArguments ?? {}
     this.name = job.name;
     this.scriptPath = job.scriptPath;
     this.role = job.role;
@@ -69,6 +70,6 @@ export class GlueJob implements GlueJobInterface {
     let language = parts[0].match(/[A-Za-z]*/)?.toString();
     this.pythonVersion = pythonVersion;
     this.glueVersionJob = parts[1];
-    this.language = language;
+    this.DefaultArguments.jobLanguage = language;
   }
 }
