@@ -46,6 +46,7 @@ export class CloudFormationUtils {
           "--enable-spark-ui": glueJob.DefaultArguments?.enableSparkUi,
           "--spark-event-logs-path": glueJob.DefaultArguments?.sparkEventLogsPath,
         },
+        Tags: glueJob.Tags,
       },
     };
 
@@ -86,6 +87,7 @@ export class CloudFormationUtils {
         Type: trigger.type,
         Actions: actions,
         Name: trigger.name,
+        Tags: trigger.Tags,
         ...(trigger.schedule && { Schedule: trigger.schedule }),
       },
     };
