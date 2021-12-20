@@ -24,9 +24,10 @@ export class GlueJob implements GlueJobInterface {
   pythonVersion?: string;
   glueVersionJob?: string;
   DefaultArguments: DefaultArgumentsInterface;
+  Tags?: Map<string,string>;
 
   constructor(job: GlueJobInterface) {
-    this.DefaultArguments = job.DefaultArguments ?? {}
+    this.DefaultArguments = job.DefaultArguments ?? {};
     this.name = job.name;
     this.scriptPath = job.scriptPath;
     this.role = job.role;
@@ -38,6 +39,7 @@ export class GlueJob implements GlueJobInterface {
     this.Connections = job.Connections;
     this.defineCommandName(job.type);
     this.setGlueVersion(this.glueVersion);
+    this.Tags = job.Tags;
   }
 
   setScriptS3Location(s3url: string) {
