@@ -167,6 +167,7 @@ And a lot of triggers..
 |NumberOfWorkers|Integer|number of workers|false|
 |Connections|List|a list of connections used by the job|false|
 |DefaultArguments|object|Special Parameters Used by AWS Glue for mor information see this read the [AWS documentation](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)|false|
+|Tags|JSON|The tags to use with this job. You may use tags to limit access to the job. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.|false|
 
 ### Triggers configuration parameters
 
@@ -185,6 +186,7 @@ Only On-Demand and Scheduled triggers are supported.
 |name|String|The name of the Glue job to trigger|true|
 |timeout|Integer|Job execution timeout|false|
 |args|Map|job arguments|false|
+|Tags|JSON|The tags to use with this job. You may use tags to limit access to the job. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.|false|
 
 
 ## And now?...

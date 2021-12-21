@@ -52,6 +52,7 @@ export class CloudFormationUtils {
           "--spark-event-logs-path":
             glueJob.DefaultArguments?.sparkEventLogsPath,
         },
+        Tags: glueJob.Tags,
       },
     };
     if (glueJob.Connections) {
@@ -96,6 +97,7 @@ export class CloudFormationUtils {
         Type: trigger.type,
         Actions: actions,
         Name: trigger.name,
+        Tags: trigger.Tags,
         ...(trigger.schedule && { Schedule: trigger.schedule }),
       },
     };

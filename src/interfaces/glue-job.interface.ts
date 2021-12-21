@@ -21,4 +21,5 @@ export interface GlueJobInterface {
   scriptS3Location?: string;
   commandName?: "glueetl" | "pythonshell";
   DefaultArguments: DefaultArgumentsInterface;
+  Tags?: Map<string,string>;
 }
