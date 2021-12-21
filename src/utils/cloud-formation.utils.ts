@@ -12,9 +12,6 @@ export class CloudFormationUtils {
           PythonVersion: glueJob.pythonVersion,
           ScriptLocation: glueJob.scriptS3Location,
         },
-        Connections: {
-          Connections: glueJob.Connections,
-        },
         GlueVersion: glueJob.glueVersionJob,
         Name: glueJob.name,
         Role: glueJob.role,
@@ -34,22 +31,35 @@ export class CloudFormationUtils {
           "--disable-proxy": glueJob.DefaultArguments?.disableProxy,
           "--job-bookmark-option": glueJob.DefaultArguments?.jobBookmarkOption,
           "--enable-auto-scaling": glueJob.DefaultArguments?.enableAutoScaling,
-          "--enable-s3-parquet-optimized-committer": glueJob.DefaultArguments?.enableS3ParquetOptimizedCommitter,
-          "--enable-rename-algorithm-v2": glueJob.DefaultArguments?.enableRenameAlgorithmV2,
-          "--enable-glue-datacatalog": glueJob.DefaultArguments?.enableGlueDatacatalog,
+          "--enable-s3-parquet-optimized-committer":
+            glueJob.DefaultArguments?.enableS3ParquetOptimizedCommitter,
+          "--enable-rename-algorithm-v2":
+            glueJob.DefaultArguments?.enableRenameAlgorithmV2,
+          "--enable-glue-datacatalog":
+            glueJob.DefaultArguments?.enableGlueDatacatalog,
           "--enable-metrics": glueJob.DefaultArguments?.enableMetrics,
-          "--enable-continuous-cloudwatch-log": glueJob.DefaultArguments?.enableContinuousCloudwatchLog,
-          "--enable-continuous-log-filter": glueJob.DefaultArguments?.enableContinuousLogFilter,
-          "--continuous-log-logGroup": glueJob.DefaultArguments?.continuousLogLogGroup,
-          "--continuous-log-logStreamPrefix": glueJob.DefaultArguments?.continuousLogLogStreamPrefix,
-          "--continuous-log-conversionPattern": glueJob.DefaultArguments?.continuousLogConversionPattern,
+          "--enable-continuous-cloudwatch-log":
+            glueJob.DefaultArguments?.enableContinuousCloudwatchLog,
+          "--enable-continuous-log-filter":
+            glueJob.DefaultArguments?.enableContinuousLogFilter,
+          "--continuous-log-logGroup":
+            glueJob.DefaultArguments?.continuousLogLogGroup,
+          "--continuous-log-logStreamPrefix":
+            glueJob.DefaultArguments?.continuousLogLogStreamPrefix,
+          "--continuous-log-conversionPattern":
+            glueJob.DefaultArguments?.continuousLogConversionPattern,
           "--enable-spark-ui": glueJob.DefaultArguments?.enableSparkUi,
-          "--spark-event-logs-path": glueJob.DefaultArguments?.sparkEventLogsPath,
+          "--spark-event-logs-path":
+            glueJob.DefaultArguments?.sparkEventLogsPath,
         },
         Tags: glueJob.Tags,
       },
     };
-
+    if (glueJob.Connections) {
+      cfn.Properties.Connections = {
+        Connections: glueJob.Connections,
+      };
+    }
     if (glueJob.commandName === "glueetl") {
       if (glueJob.WorkerType) {
         cfn.Properties.WorkerType = glueJob.WorkerType;
