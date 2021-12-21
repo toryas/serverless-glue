@@ -9,6 +9,10 @@ The principal changes are:
 
 
 
+## [2.1.1] - 2021-12-21
+
+### Fixed
+- Remove empty conections objecto from CF template when don`t specify any conection
 ## [2.1.0] - 2021-12-15
 
 ### Add
