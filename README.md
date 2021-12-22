@@ -1,44 +1,11 @@
 # Serverless Glue
 
 ---
-## Update Version 2.0.0
+## Update Version 2.X.X
 
 I set out to revive this project by refactoring the code, to keep it clean and easy to understand.
 
-The principal changes are:
-
-
-
-## [2.1.1] - 2021-12-21
-
-### Fixed
-- Remove empty conections objecto from CF template when don`t specify any conection
-## [2.1.0] - 2021-12-15
-
-### Add
-- Implement DefaultArguments for jobs
-## [2.0.2] - 2021-12-13
-
-### Fixed
-- Replace incorrect async loop in serverless
-
-## [2.0.1] - 2021-12-09
-
-### Changed
-- Move typescript dependencie to dev
-## [2.0.0] - 2021-11-29
-### Changed
-- Refactoring code from JS to TS, and restructured folders.
-- Plugin`s configuration get out from *custom* level in serverless.yml now are in root of file. 
-- Remove redundant level *job* in jobs config.
-- **script** attribute are rename to ***scriptPath**
-- Remove redundant level *Conections* in **Conections** config.
-- Remove redundant level trigger from triggers config.
-- Rename **job** attribute to **action** in trigger config.
-### Fixed
-- Improve documentation for **Conections** config.
-
-
+The principal changes [here](#changelog)
 ---
 
 This is a plugin for Serverless framework that provide the posibliti to deploy AWS Glue Jobs and Triggers
@@ -192,3 +159,40 @@ Only On-Demand and Scheduled triggers are supported.
 ## And now?...
 
 Only run `serverless deploy`
+---
+
+# Changelog
+<a name="changelog"></a>
+
+## [2.2.0] - 2021-12-22
+
+### Add
+- Implement Tags for jobs and triggers
+## [2.1.1] - 2021-12-21
+
+### Fixed
+- Remove empty conections objecto from CF template when don`t specify any conection
+## [2.1.0] - 2021-12-15
+
+### Add
+- Implement DefaultArguments for jobs
+## [2.0.2] - 2021-12-13
+
+### Fixed
+- Replace incorrect async loop in serverless
+
+## [2.0.1] - 2021-12-09
+
+### Changed
+- Move typescript dependencie to dev
+## [2.0.0] - 2021-11-29
+### Changed
+- Refactoring code from JS to TS, and restructured folders.
+- Plugin`s configuration get out from *custom* level in serverless.yml now are in root of file. 
+- Remove redundant level *job* in jobs config.
+- **script** attribute are rename to ***scriptPath**
+- Remove redundant level *Conections* in **Conections** config.
+- Remove redundant level trigger from triggers config.
+- Rename **job** attribute to **action** in trigger config.
+### Fixed
+- Improve documentation for **Conections** config.
