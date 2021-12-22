@@ -24,4 +24,5 @@ export class DefaultArguments implements DefaultArgumentsInterface {
   enableSparkUi?: string | undefined;
   sparkEventLogsPath?: string | undefined;
   tempDir?: any;
+  customDefaultArguments?: Map<string, string> | undefined;
 }
