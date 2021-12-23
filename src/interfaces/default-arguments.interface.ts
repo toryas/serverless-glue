@@ -22,4 +22,5 @@ export interface DefaultArgumentsInterface {
   continuousLogConversionPattern?: string;
   enableSparkUi?: string;
   sparkEventLogsPath?: string;
+  customArguments?: Map<string,string>;
 }

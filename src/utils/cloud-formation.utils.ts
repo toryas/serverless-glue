@@ -55,6 +55,14 @@ export class CloudFormationUtils {
         Tags: glueJob.Tags,
       },
     };
+    if (glueJob.DefaultArguments.customArguments) {
+      Object.keys(glueJob.DefaultArguments.customArguments).forEach(key => {
+        if (!cfn.Properties.DefaultArguments[key]) {
+          const destinationKey = key.startsWith('--') ? key : '--' + key;
+          cfn.Properties.DefaultArguments[destinationKey] = glueJob.DefaultArguments.customArguments[key];
+        }
+      })
+    }
     if (glueJob.Connections) {
       cfn.Properties.Connections = {
         Connections: glueJob.Connections,
