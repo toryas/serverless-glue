@@ -56,12 +56,11 @@ export class CloudFormationUtils {
       },
     };
     if (glueJob.DefaultArguments.customArguments) {
-      Object.keys(glueJob.DefaultArguments.customArguments).forEach(key => {
-        if (!cfn.Properties.DefaultArguments[key]) {
-          const destinationKey = key.startsWith('--') ? key : '--' + key;
-          cfn.Properties.DefaultArguments[destinationKey] = glueJob.DefaultArguments.customArguments[key];
-        }
-      })
+      const customArguments = CloudFormationUtils.parseCustomArguments(glueJob.DefaultArguments.customArguments);
+      cfn.Properties.DefaultArguments = {
+        ...cfn.Properties.DefaultArguments,
+        ...customArguments
+      }
     }
     if (glueJob.Connections) {
       cfn.Properties.Connections = {
@@ -73,11 +72,23 @@ export class CloudFormationUtils {
         cfn.Properties.WorkerType = glueJob.WorkerType;
       }
       if (glueJob.NumberOfWorkers) {
-        cfn.Properties.NumberOfWorkers = glueJob.NumberOfWorkers;
+        cfn.Properties.NumberOwfWorkers = glueJob.NumberOfWorkers;
       }
     }
 
     return cfn;
+  }
+
+  static parseCustomArguments(customArguments: { [k: string]: any }) {
+    const customArgumentsJson: { [k: string]: any } = {};
+    const keyArguments = Object.keys(customArguments);
+    for (const argumentName of keyArguments) {
+      const _argumentName = argumentName.startsWith("--")
+        ? argumentName
+        : `--${argumentName}`;
+      customArgumentsJson[_argumentName] = customArguments[argumentName];
+    }
+    return customArgumentsJson;
   }
 
   static generateBucketTemplate(bucketName: string) {

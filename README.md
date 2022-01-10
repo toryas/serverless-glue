@@ -69,7 +69,7 @@ Glue:
         continuousLogConversionPattern: string # Optional
         enableSparkUi: string # Optional
         sparkEventLogsPath: string # Optional
-        customDefaultArguments: # Optional; these are user-specified custom default arguments that are passed into cloudformation with a leading -- (required for glue)
+        customArguments: # Optional; these are user-specified custom default arguments that are passed into cloudformation with a leading -- (required for glue)
           custom_arg_1: custom_value
           custom_arg_2: other_custom_value
   triggers:
@@ -167,6 +167,10 @@ Only run `serverless deploy`
 # Changelog
 <a name="changelog"></a>
 
+## [2.3.0] - 2021-12-23
+
+### Add
+- AImplement Custom Arguments for Jobs
 ## [2.2.0] - 2021-12-22
 
 ### Add
