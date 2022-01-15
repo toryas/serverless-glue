@@ -185,7 +185,7 @@ Only run `serverless deploy`
 ## [2.3.0] - 2021-12-23
 
 ### Add
-- AImplement Custom Arguments for Jobs
+- Implement Custom Arguments for Jobs
 ## [2.2.0] - 2021-12-22
 
 ### Add
