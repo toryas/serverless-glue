@@ -1,4 +1,5 @@
-import AWS from "aws-sdk";
+import * as AWS from 'aws-sdk';
+
 
 export class AwsHelper {
   credentials: AWS.Credentials;

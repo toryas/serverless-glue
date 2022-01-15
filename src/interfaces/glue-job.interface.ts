@@ -13,13 +13,16 @@ export interface GlueJobInterface {
     | "scala2-1.0"
     | "scala2-0.9"
     | "scala2-2.0";
+  Description: string;
   role: string;
   MaxConcurrentRuns?: number;
-  WorkerType?: "Standard" | "G1.X" | "G2.X";
+  WorkerType?: "G1.X" | "G2.X";
   NumberOfWorkers?: number;
   Connections?: string[];
   scriptS3Location?: string;
   commandName?: "glueetl" | "pythonshell";
   DefaultArguments: DefaultArgumentsInterface;
   Tags?: Map<string,string>;
+  Timeout: number;
+  MaxRetries: number;
 }

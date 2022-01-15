@@ -14,6 +14,7 @@ export class CloudFormationUtils {
         },
         GlueVersion: glueJob.glueVersionJob,
         Name: glueJob.name,
+        Description: glueJob.Description,
         Role: glueJob.role,
         ExecutionProperty: {
           MaxConcurrentRuns: glueJob.MaxConcurrentRuns ?? 1,
@@ -53,6 +54,8 @@ export class CloudFormationUtils {
             glueJob.DefaultArguments?.sparkEventLogsPath,
         },
         Tags: glueJob.Tags,
+        Timeout: glueJob.Timeout,
+        MaxRetries: glueJob.MaxRetries
       },
     };
     if (glueJob.DefaultArguments.customArguments) {
@@ -72,7 +75,7 @@ export class CloudFormationUtils {
         cfn.Properties.WorkerType = glueJob.WorkerType;
       }
       if (glueJob.NumberOfWorkers) {
-        cfn.Properties.NumberOwfWorkers = glueJob.NumberOfWorkers;
+        cfn.Properties.NumberOfWorkers = glueJob.NumberOfWorkers;
       }
     }
 
@@ -116,7 +119,9 @@ export class CloudFormationUtils {
         Type: trigger.type,
         Actions: actions,
         Name: trigger.name,
+        Description: trigger.Description,
         Tags: trigger.Tags,
+        StartOnCreation: trigger.StartOnCreation,
         ...(trigger.schedule && { Schedule: trigger.schedule }),
       },
     };

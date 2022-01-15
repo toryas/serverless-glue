@@ -18,13 +18,13 @@ This is a plugin for Serverless framework that provide the posibliti to deploy A
     plugins:
         - serverless-glue
     ```
-## How work
+## How it works
 
-The plugin create CloufFormation resources of your configuration before make the serverless deploy then add it to the serverless template.
+The plugin creates CloufFormation resources of your configuration before make the serverless deploy then add it to the serverless template.
 
 So any glue-job deployed with this plugin is part of your stack too.
 
-## How configure your GlueJobs
+## How to configure your GlueJob(s)
 
 Configure yours glue jobs in the root of servelress.yml like this:
 
@@ -37,16 +37,19 @@ Glue:
   jobs:
     - name: super-glue-job # Required
       scriptPath: src/script.py # Required script will be named with the name after '/' and uploaded to s3Prefix location
+      Description: # Optional, string
       tempDir: true # Optional true | false
       type: spark # spark / pythonshell # Required
       glueVersion: python3-2.0 # Required python3-1.0 | python3-2.0 | python2-1.0 | python2-0.9 | scala2-1.0 | scala2-0.9 | scala2-2.0
       role: arn:aws:iam::000000000:role/someRole # Required
       MaxConcurrentRuns: 3 # Optional
-      WorkerType: Standard # Optional  | Standard  | G1.X | G2.X
+      WorkerType: Standard # Optional, G1.X | G2.X
       NumberOfWorkers: 1 # Optional
       Connections: # Optional
         - some-conection-string
         - other-conection-string
+      Timeout: # Optional, number
+      MaxRetries: # Optional, number
       DefaultArguments: # Optional
         class: string # Optional
         scriptLocation: string # Optional
@@ -72,19 +75,26 @@ Glue:
         customArguments: # Optional; these are user-specified custom default arguments that are passed into cloudformation with a leading -- (required for glue)
           custom_arg_1: custom_value
           custom_arg_2: other_custom_value
+      Tags:
+        source: your_source
+        process: your_process
   triggers:
     - name: some-trigger-name # Required
+      Description: # Optional, string
+      StartOnCreation: True # Optional, True or False
       schedule: 30 12 * * ? * # Optional, CRON expression. The trigger will be created with On-Demand type if the schedule is not provided.
+      Tags:
+        trigger_type: weekends      
       actions: # Required. One or more jobs to trigger
         - name: super-glue-job # Required
           args: # Optional
-            arg1: value1
-            arg2: value2
-          timeout: 30 # Optional
+            custom_arg_1: custom_value
+            custom_arg_2: other_custom_value
+          timeout: 30 # Optional, if set, it overwrites specific jobs timeout when job starts via trigger
 
 ```
 
-you can define a lot of jobs..
+You can define a lot of jobs..
 
 ```yml
   Glue:
@@ -127,12 +137,15 @@ And a lot of triggers..
 |Parameter|Type|Description|Required|
 |-|-|-|-|
 |name|String|name of job|true|
+|Description|String|Description of the job|False|
 |scriptPath|String|script path in the project|true|
 |tempDir|Boolean|flag indicate if job required a temp folder, if true plugin create a bucket for tmp|false|
 |type|String|Indicate if the type of your job. Values can use are : `spark` or  `pythonshell`|true|
 |glueVersion|String|Indicate language and glue version to use ( `[language][version]-[glue version]`) the value can you use are: <ul><li>python3-1.0</li><li>python3-2.0</li><li>python2-1.0</li><li>python2-0.9</li><li>scala2-1.0</li><li>scala2-0.9</li><li>scala2-2.0</li></ul>|true|
 |role|String| arn role to execute job|true|
 |MaxConcurrentRuns|Double|max concurrent runs of the job|false|
+|MaxRetries|Int|Maximum number of retires in case of failure|False|
+|Timeout|Int|Job timeout in number of minutes|False|
 |WorkerType|String|The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.|false|
 |NumberOfWorkers|Integer|number of workers|false|
 |Connections|List|a list of connections used by the job|false|
@@ -146,6 +159,8 @@ And a lot of triggers..
 |name|String|name of the trigger|true|
 |schedule|String|CRON expression|false|
 |actions|Array|An array of jobs to trigger|true|
+|Description|String|Description of the Trigger|False|
+|StartOnCreation|Boolean|Whether the trigger starts when created. Not supperted for ON_DEMAND triggers|False|
 
 Only On-Demand and Scheduled triggers are supported.
 
@@ -154,9 +169,9 @@ Only On-Demand and Scheduled triggers are supported.
 |Parameter|Type|Description|Required|
 |-|-|-|-|
 |name|String|The name of the Glue job to trigger|true|
-|timeout|Integer|Job execution timeout|false|
+|timeout|Integer|Job execution timeout. It overwrites|false|
 |args|Map|job arguments|false|
-|Tags|JSON|The tags to use with this job. You may use tags to limit access to the job. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.|false|
+|Tags|JSON|The tags to use with this triggers. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.|false|
 
 
 ## And now?...

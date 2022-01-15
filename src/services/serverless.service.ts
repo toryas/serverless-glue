@@ -94,7 +94,7 @@ export class ServerlessService {
   }
 
   async uploadJobScripts(job: GlueJob) {
-    if(!this.config) throw new Error("Gle Config not found.");
+    if(!this.config) throw new Error("Glue Config not found.");
     const fileName = job.scriptPath.split("/").pop();
     const params = {
       Bucket: this.config.bucketDeploy,
