@@ -20,13 +20,13 @@ This is a plugin for Serverless framework that provide the posibliti to deploy A
     ```
 ## How it works
 
-The plugin creates CloufFormation resources of your configuration before make the serverless deploy then add it to the serverless template.
+The plugin creates CloufFormation resources of your configuration before making the serverless deploy then add it to the serverless template.
 
 So any glue-job deployed with this plugin is part of your stack too.
 
 ## How to configure your GlueJob(s)
 
-Configure yours glue jobs in the root of servelress.yml like this:
+Configure your glue jobs in the root of servelress.yml like this:
 
 ```yml
 Glue:
@@ -76,8 +76,8 @@ Glue:
           custom_arg_1: custom_value
           custom_arg_2: other_custom_value
       Tags:
-        source: your_source
-        process: your_process
+        first_tag_example: example1
+        second_tag_example: example2
   triggers:
     - name: some-trigger-name # Required
       Description: # Optional, string
