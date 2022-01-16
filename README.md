@@ -75,6 +75,11 @@ Glue:
         customArguments: # Optional; these are user-specified custom default arguments that are passed into cloudformation with a leading -- (required for glue)
           custom_arg_1: custom_value
           custom_arg_2: other_custom_value
+      SupportFiles: # Optional
+        - local_path: path/to/file/or/folder/ # Required if SupportFiles is given, you can pass a folder path or a file path
+          s3_bucket: bucket-name-where-to-upload-files # Required if SupportFiles is given
+          s3_prefix: some/s3/key/location/ # Required if SupportFiles is given
+          execute_upload: True # Boolean, True to execute upload, False to not upload. Required if SupportFiles is given
       Tags:
         first_tag_example: example1
         second_tag_example: example2
@@ -150,6 +155,7 @@ And a lot of triggers..
 |NumberOfWorkers|Integer|number of workers|false|
 |Connections|List|a list of connections used by the job|false|
 |DefaultArguments|object|Special Parameters Used by AWS Glue for mor information see this read the [AWS documentation](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)|false|
+|SupportFiles|List|List of supporting files for the glue job that need upload to S3|false|
 |Tags|JSON|The tags to use with this job. You may use tags to limit access to the job. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.|false|
 
 ### Triggers configuration parameters
