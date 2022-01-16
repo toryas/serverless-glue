@@ -1,4 +1,5 @@
 import { DefaultArgumentsInterface } from "./default-arguments.interface";
+import { SupportFilesInterface } from "./support-files.interface";
 
 export interface GlueJobInterface {
   name: string;
@@ -25,4 +26,5 @@ export interface GlueJobInterface {
   Tags?: Map<string,string>;
   Timeout: number;
   MaxRetries: number;
+  SupportFiles: SupportFilesInterface[];
 }

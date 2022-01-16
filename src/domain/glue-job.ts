@@ -1,5 +1,6 @@
 import { DefaultArgumentsInterface } from "../interfaces/default-arguments.interface";
 import { GlueJobInterface } from "../interfaces/glue-job.interface";
+import { SupportFilesInterface } from "../interfaces/support-files.interface";
 
 export class GlueJob implements GlueJobInterface {
   name: string;
@@ -28,6 +29,8 @@ export class GlueJob implements GlueJobInterface {
   Tags?: Map<string,string>;
   Timeout: number;
   MaxRetries: number;
+  SupportFiles: SupportFilesInterface[];
+  
 
   constructor(job: GlueJobInterface) {
     this.DefaultArguments = job.DefaultArguments ?? {};
@@ -47,6 +50,7 @@ export class GlueJob implements GlueJobInterface {
     this.Tags = job.Tags;
     this.Timeout = job.Timeout;
     this.MaxRetries = job.MaxRetries;
+    this.SupportFiles = job.SupportFiles;
   }
 
   setScriptS3Location(s3url: string) {
