@@ -139,7 +139,7 @@ export class ServerlessService {
             Key: `${supportFile.s3_prefix}${filename}`,
           };
           this.awsHelper.uploadFileToS3(params);
-          this.helperless.log(`Uploaded ${filename} in s3://${params.Bucket}/${params.Key}`);
+          this.helperless.log(`Uploaded '${filename}' in s3://${params.Bucket}/${params.Key}`);
         }
 
         if(fs.lstatSync(supportFile.local_path).isDirectory()) {
@@ -151,7 +151,7 @@ export class ServerlessService {
               Key: `${supportFile.s3_prefix}${filename}`,
             };
             this.awsHelper.uploadFileToS3(params);
-            this.helperless.log(`Uploaded ${filename} in s3://${params.Bucket}/${params.Key}`);
+            this.helperless.log(`Uploaded '${filename}' in s3://${params.Bucket}/${params.Key}`);
           });
         }
       }
