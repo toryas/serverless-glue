@@ -191,6 +191,8 @@ Only run `serverless deploy`
 ## [2.3.0] - 2021-12-23
 ### Fix
 - Fix NumberOwfWorkers typo.
+
+# Add
 - Added `Tiemout`, `MaxRetires` and `Description` parameters to Glue Job arguments. Added `Description` and `StartOnCreation` parameters to Glue Job Trigger arguments.
 - Added `SupportFiles` to Glue Job arguments handling the upload to S3 of relevant-to-the-Glue-Job(s) files
 
