@@ -188,7 +188,7 @@ Only run `serverless deploy`
 # Changelog
 <a name="changelog"></a>
 
-## [2.3.0] - 2021-12-23
+## [2.3.0] - 2021-01-17
 ### Fix
 - Fix NumberOwfWorkers typo.
 
