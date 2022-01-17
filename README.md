@@ -5,10 +5,10 @@
 
 I set out to revive this project by refactoring the code, to keep it clean and easy to understand.
 
-The principal changes [here](#changelog)
+The principal changes are available [here](#changelog)
 ---
 
-This is a plugin for Serverless framework that provide the posibliti to deploy AWS Glue Jobs and Triggers
+This is a plugin for Serverless framework that provide the possibility to deploy AWS Glue Jobs and Triggers
 
 ## Install
 
@@ -81,15 +81,15 @@ Glue:
           s3_prefix: some/s3/key/location/ # Required if SupportFiles is given
           execute_upload: True # Boolean, True to execute upload, False to not upload. Required if SupportFiles is given
       Tags:
-        first_tag_example: example1
-        second_tag_example: example2
+        job_tag_example_1: example1
+        job_tag_example_2: example2
   triggers:
     - name: some-trigger-name # Required
       Description: # Optional, string
       StartOnCreation: True # Optional, True or False
       schedule: 30 12 * * ? * # Optional, CRON expression. The trigger will be created with On-Demand type if the schedule is not provided.
       Tags:
-        trigger_type: weekends      
+        trigger_tag_example_1: example1     
       actions: # Required. One or more jobs to trigger
         - name: super-glue-job # Required
           args: # Optional
@@ -99,7 +99,7 @@ Glue:
 
 ```
 
-You can define a lot of jobs..
+You can define a lot of jobs...
 
 ```yml
   Glue:
@@ -114,7 +114,7 @@ You can define a lot of jobs..
 
 ```
 
-And a lot of triggers..
+And a lot of triggers...
 
 ```yml
   Glue:
