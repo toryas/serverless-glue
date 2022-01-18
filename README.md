@@ -43,7 +43,7 @@ Glue:
       glueVersion: python3-2.0 # Required python3-1.0 | python3-2.0 | python2-1.0 | python2-0.9 | scala2-1.0 | scala2-0.9 | scala2-2.0
       role: arn:aws:iam::000000000:role/someRole # Required
       MaxConcurrentRuns: 3 # Optional
-      WorkerType: Standard # Optional, G1.X | G2.X
+      WorkerType: Standard # Optional, G.1X | G.2X
       NumberOfWorkers: 1 # Optional
       Connections: # Optional
         - some-conection-string

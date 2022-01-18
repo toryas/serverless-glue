@@ -40,6 +40,8 @@ export class AwsHelper {
    * @param options 
    */
   async uploadFileToS3(options: AWS.S3.PutObjectRequest) {
-    await this.s3.upload(options).promise();
+    if(!process.env.SLSGLUE_SKIP_UPLOADS){
+      await this.s3.upload(options).promise();
+    }
   }
 }

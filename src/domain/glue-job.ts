@@ -18,7 +18,7 @@ export class GlueJob implements GlueJobInterface {
   Description: string;
   role: string;
   MaxConcurrentRuns?: number;
-  WorkerType?: "G1.X" | "G2.X" | undefined;
+  WorkerType?: "G.1X" | "G.2X" | "Standard" | undefined;
   NumberOfWorkers?: number | undefined;
   Connections?: string[] | undefined;
   scriptS3Location?: string;

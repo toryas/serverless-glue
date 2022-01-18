@@ -17,7 +17,7 @@ export interface GlueJobInterface {
   Description: string;
   role: string;
   MaxConcurrentRuns?: number;
-  WorkerType?: "G1.X" | "G2.X";
+  WorkerType?: "G.1X" | "G.2X" | "Standard";
   NumberOfWorkers?: number;
   Connections?: string[];
   scriptS3Location?: string;
