@@ -2,6 +2,7 @@ import { GlueJob } from "../domain/glue-job";
 import { GlueTrigger } from "../domain/glue-trigger";
 import { GluePluginConfigInterface } from "../interfaces/glue-plugin-config.interce";
 import { Global } from "../constants/global.constant";
+import { SupportFile } from "../domain/support-files";
 
 export class GlueHelper {
   constructor(private config: GluePluginConfigInterface) {}
@@ -54,4 +55,17 @@ export class GlueHelper {
     }
     return triggers;
   }
+
+  getSupportFiles(job: GlueJob) {
+    let supportFiles:SupportFile[] = [];
+    if(!job.SupportFiles){
+      return supportFiles
+    }   
+    for (let supportFile of job.SupportFiles) {
+      let glueSupportFile = new SupportFile(supportFile)
+      supportFiles.push(glueSupportFile)
+    }
+    return supportFiles 
+  }
+
 }

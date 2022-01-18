@@ -7,16 +7,20 @@ export class GlueTrigger implements GlueTriggerInterface{
     schedule?: string;
     type?:string;
     actions: GlueTriggerActionInterface[];
+    Description: string;
     Tags?: Map<string,string>;
+    StartOnCreation: boolean;
 
     constructor(trigger:GlueTriggerInterface){
         this.name = trigger.name;
         this.actions = trigger.actions;
+        this.Description = trigger.Description
         this.setSchedule(trigger.schedule);
         this.Tags = trigger.Tags;
+        this.StartOnCreation = trigger.StartOnCreation;
     }
 
-    setSchedule(cronSchedule:string| undefined) {
+    setSchedule(cronSchedule:string|undefined) {
         if (cronSchedule) {
             this.type = "SCHEDULED"
             this.schedule = `cron(${cronSchedule})`;

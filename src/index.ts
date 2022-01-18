@@ -1,5 +1,5 @@
 // const { default: GlueHelper } = require("./helper/glue.helper");
-import {} from "./";
+import {} from ".";
 import { ServerlessService } from "./services/serverless.service";
 import { GlueSchema } from "./schemas/glue.schema";
 

@@ -1,5 +1,6 @@
 import { DefaultArgumentsInterface } from "../interfaces/default-arguments.interface";
 import { GlueJobInterface } from "../interfaces/glue-job.interface";
+import { SupportFilesInterface } from "../interfaces/support-files.interface";
 
 export class GlueJob implements GlueJobInterface {
   name: string;
@@ -14,9 +15,10 @@ export class GlueJob implements GlueJobInterface {
     | "scala2-1.0"
     | "scala2-0.9"
     | "scala2-2.0";
+  Description: string;
   role: string;
   MaxConcurrentRuns?: number;
-  WorkerType?: "Standard" | "G1.X" | "G2.X" | undefined;
+  WorkerType?: "G1.X" | "G2.X" | undefined;
   NumberOfWorkers?: number | undefined;
   Connections?: string[] | undefined;
   scriptS3Location?: string;
@@ -25,6 +27,10 @@ export class GlueJob implements GlueJobInterface {
   glueVersionJob?: string;
   DefaultArguments: DefaultArgumentsInterface;
   Tags?: Map<string,string>;
+  Timeout: number;
+  MaxRetries: number;
+  SupportFiles: SupportFilesInterface[];
+  
 
   constructor(job: GlueJobInterface) {
     this.DefaultArguments = job.DefaultArguments ?? {};
@@ -32,14 +38,19 @@ export class GlueJob implements GlueJobInterface {
     this.scriptPath = job.scriptPath;
     this.role = job.role;
     this.glueVersion = job.glueVersion;
+    this.Description = job.Description;
     this.type = job.type;
     this.MaxConcurrentRuns = job.MaxConcurrentRuns;
+    this.MaxRetries = job.MaxRetries;
     this.WorkerType = job.WorkerType;
     this.NumberOfWorkers = job.NumberOfWorkers;
     this.Connections = job.Connections;
     this.defineCommandName(job.type);
     this.setGlueVersion(this.glueVersion);
     this.Tags = job.Tags;
+    this.Timeout = job.Timeout;
+    this.MaxRetries = job.MaxRetries;
+    this.SupportFiles = job.SupportFiles;
   }
 
   setScriptS3Location(s3url: string) {
