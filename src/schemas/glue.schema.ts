@@ -7,5 +7,5 @@ export const GlueSchema = {
     tempDirBucket: { type: "string" },
     tempDirS3Prefix: { type: "string" },
   },
-  require: ["bucketDeploy"],
+  required: ["bucketDeploy"],
 };
