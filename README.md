@@ -188,6 +188,9 @@ Only run `serverless deploy`
 # Changelog
 <a name="changelog"></a>
 
+## [2.4.1] - 2022-02-01
+### Fix
+- Fix schema typo that blocks serverless 3.
 ## [2.4.0] - 2022-01-17
 ### Fix
 - Fix NumberOwfWorkers typo.
