@@ -1,10 +1,15 @@
 # Serverless Glue
 
+Serverless-glue is an open source MIT licensed project, which has been able to grow thanks to the community. This project is the result of an idea that did not let it rest in oblivion and many hours of work after hours.
+
+If you want to help me you can do it in the following ways:
+
+- With a donation through paypal [here](https://paypal.me/toryas).
+- Sharing your feedback [here](https://github.com/toryas/serverless-glue/issues).
+
+I hope you liked this project and it is useful for you.
+
 ---
-## Update Version 2.X.X
-
-I set out to revive this project by refactoring the code, to keep it clean and easy to understand.
-
 The principal changes are available [here](#changelog)
 ---
 
@@ -31,6 +36,17 @@ Configure your glue jobs in the root of servelress.yml like this:
 ```yml
 Glue:
   bucketDeploy: someBucket # Required
+  createBucket: true # Optional, default = false
+  createBucketConfig: # Optional 
+    ACL: private # Optional, private | public-read | public-read-write | authenticated-read
+    LocationConstraint: af-south-1
+    GrantFullControl: 'STRING_VALUE' # Optional
+    GrantRead: 'STRING_VALUE' # Optional
+    GrantReadACP: 'STRING_VALUE' # Optional
+    GrantWrite: 'STRING_VALUE' # Optional
+    GrantWriteACP: 'STRING_VALUE' # Optional
+    ObjectLockEnabledForBucket: true # Optional
+    ObjectOwnership: BucketOwnerPreferred # Optional
   s3Prefix: some/s3/key/location/ # optional, default = 'glueJobs/'
   tempDirBucket: someBucket # optional, default = '{serverless.serviceName}-{provider.stage}-gluejobstemp'
   tempDirS3Prefix: some/s3/key/location/ # optional, default = ''. The job name will be appended to the prefix name
@@ -131,11 +147,26 @@ And a lot of triggers...
 |Parameter|Type|Description|Required|
 |-|-|-|-|
 |bucketDeploy|String|S3 Bucket name|true|
-|createBucket|String|If true, a bucket named as `bucketDeploy` will be created before. Helpful if you have not created the bucket first|false|
+|createBucket|Boolean|If true, a bucket named as `bucketDeploy` will be created before. Helpful if you have not created the bucket first|false|
+createBucketConfig|createBucketConfig| Bucket configuration for creation on S3 |false|
 |s3Prefix|String|S3 prefix name|false|
 |tempDirBucket|String|S3 Bucket name for Glue temporary directory. If dont pass argument the bucket'name will generates with pattern {serverless.serviceName}-{provider.stage}-gluejobstemp|false|
 |tempDirS3Prefix|String|S3 prefix name for Glue temporary directory|false|
 |jobs|Array|Array of glue jobs to deploy|true|
+
+### CreateBucket confoguration parameters
+
+|Parameter|Type|Description|Required|
+|-|-|-|-|
+|ACL|String|The canned ACL to apply to the bucket. Possible values include:<ul><li>private</li><li>public-read</li><li>public-read-write</li><li>authenticated-read</li></ul>|False|
+|LocationConstraint|String| Specifies the Region where the bucket will be created. If you don't specify a Region, the bucket is created in the US East (N. Virginia) Region (us-east-1). Possible values are: <ul><li>af-south-1</li><li>ap-east-1</li><li>ap-northeast-1</li><li>ap-northeast-2</li><li>ap-northeast-3</li><li>ap-south-1</li><li>ap-southeast-1</li><li>ap-southeast-2</li><li>ca-central-1</li><li>cn-north-1</li><li>cn-northwest-1</li><li>EU</li><li>eu-central-1</li><li>eu-north-1</li><li>eu-south-1</li><li>eu-west-1</li><li>eu-west-2</li><li>eu-west-3</li><li>me-south-1</li><li>sa-east-1</li><li>us-east-2</li><li>us-gov-east-1</li><li>us-gov-west-1</li><li>us-west-1</li><li>us-west-2</li></ul>|false|
+|GrantFullControl|String|Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.|false|
+|GrantRead|(String|Allows grantee to list the objects in the bucket.|false|
+|GrantReadACP|String|Allows grantee to read the bucket ACL.|false|
+|GrantWrite|String|Allows grantee to create new objects in the bucket. For the bucket and object owners of existing objects, also allows deletions and overwrites of those objects.|false|
+|GrantWriteACP|String|Allows grantee to write the ACL for the applicable bucket.|false|
+|ObjectLockEnabledForBucket|Boolean|Specifies whether you want S3 Object Lock to be enabled for the new bucket.|false|
+|ObjectOwnership|String|The container element for object ownership for a bucket's ownership controls.Possible values include:<ul><li>BucketOwnerPreferred</li><li>ObjectWriter</li><li>BucketOwnerEnforced</li></ul>|false|
 
 ### Jobs configurations parameters
 
@@ -187,6 +218,18 @@ Only run `serverless deploy`
 
 # Changelog
 <a name="changelog"></a>
+
+
+
+## [2.5.0] - 2022-02-14
+
+### Add
+- Add the `createBucketConfig` feature to set the bucket creation configuration.
+
+### Changed
+- Removed message when support files not found, now logging message when support files exist.
+### Fix
+- Improve the `createBucket` example of documentation.
 
 ## [2.4.1] - 2022-02-01
 ### Fix
