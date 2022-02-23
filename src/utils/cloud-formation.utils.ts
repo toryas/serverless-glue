@@ -55,7 +55,8 @@ export class CloudFormationUtils {
         },
         Tags: glueJob.Tags,
         Timeout: glueJob.Timeout,
-        MaxRetries: glueJob.MaxRetries
+        MaxRetries: glueJob.MaxRetries,
+        SecurityConfiguration: glueJob.SecurityConfiguration
       },
     };
     if (glueJob.DefaultArguments.customArguments) {
