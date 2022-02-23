@@ -111,6 +111,7 @@ export class CloudFormationUtils {
           JobName: action.name,
           Arguments: action.args,
           Timeout: action.timeout,
+          SecurityConfiguration: action.SecurityConfiguration,
         };
       }
     );
