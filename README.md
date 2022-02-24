@@ -61,6 +61,7 @@ Glue:
       MaxConcurrentRuns: 3 # Optional
       WorkerType: Standard # Optional, G.1X | G.2X
       NumberOfWorkers: 1 # Optional
+      SecurityConfiguration: # Optional, name of security configuration
       Connections: # Optional
         - some-conection-string
         - other-conection-string
@@ -112,6 +113,7 @@ Glue:
             custom_arg_1: custom_value
             custom_arg_2: other_custom_value
           timeout: 30 # Optional, if set, it overwrites specific jobs timeout when job starts via trigger
+          SecurityConfiguration: # Optional, name of security configuration
 
 ```
 
@@ -184,6 +186,7 @@ createBucketConfig|createBucketConfig| Bucket configuration for creation on S3 |
 |Timeout|Int|Job timeout in number of minutes|False|
 |WorkerType|String|The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.|false|
 |NumberOfWorkers|Integer|number of workers|false|
+|SecurityConfiguration|String|The name of the security configuration that the job should use|false|
 |Connections|List|a list of connections used by the job|false|
 |DefaultArguments|object|Special Parameters Used by AWS Glue for mor information see this read the [AWS documentation](https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)|false|
 |SupportFiles|List|List of supporting files for the glue job that need upload to S3|false|
@@ -239,7 +242,7 @@ Only run `serverless deploy`
 - Fix NumberOwfWorkers typo.
 
 ### Add
-- Added `Tiemout`, `MaxRetires` and `Description` parameters to Glue Job arguments. Added `Description` and `StartOnCreation` parameters to Glue Job Trigger arguments.
+- Added `Timeout`, `MaxRetries` and `Description` parameters to Glue Job arguments. Added `Description` and `StartOnCreation` parameters to Glue Job Trigger arguments.
 - Added `SupportFiles` to Glue Job arguments handling the upload to S3 of relevant-to-the-Glue-Job(s) files
 
 
@@ -254,7 +257,7 @@ Only run `serverless deploy`
 ## [2.1.1] - 2021-12-21
 
 ### Fixed
-- Remove empty conections objecto from CF template when don`t specify any conection
+- Remove empty connections object from CF template when don`t specify any conection
 ## [2.1.0] - 2021-12-15
 
 ### Add
@@ -274,8 +277,8 @@ Only run `serverless deploy`
 - Plugin`s configuration get out from *custom* level in serverless.yml now are in root of file. 
 - Remove redundant level *job* in jobs config.
 - **script** attribute are rename to ***scriptPath**
-- Remove redundant level *Conections* in **Conections** config.
+- Remove redundant level *Connections* in **Connections** config.
 - Remove redundant level trigger from triggers config.
 - Rename **job** attribute to **action** in trigger config.
 ### Fixed
-- Improve documentation for **Conections** config.
+- Improve documentation for **Connections** config.

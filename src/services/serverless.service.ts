@@ -41,7 +41,7 @@ export class ServerlessService {
       this.helperless.log("Jobs not found.");
       return;
     }
-    this.helperless.log("Proccessing Jobs.");
+    this.helperless.log("Processing Jobs.");
     let jobs = this.glueHelper.getGlueJobs();
     if (this.config?.createBucket) {
       let params = {
@@ -99,7 +99,7 @@ export class ServerlessService {
       this.helperless.log("Triggers not found.");
       return;
     }
-    this.helperless.log("Proccessing Triggers.");
+    this.helperless.log("Processing Triggers.");
     let triggers = this.glueHelper.getGlueTriggers();
     triggers.forEach((trigger: GlueTrigger) => {
       const triggerCFTemplate = CloudFormationUtils.glueTriggerToCF(trigger);
@@ -128,7 +128,7 @@ export class ServerlessService {
       return;
     }
     this.helperless.log("Support Files found.");
-    this.helperless.log("Proccessing Support Files.");
+    this.helperless.log("Processing Support Files.");
     let supportFiles = this.glueHelper.getSupportFiles(job);
 
     supportFiles.forEach(async (supportFile: SupportFile) => {
