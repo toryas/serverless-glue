@@ -27,4 +27,5 @@ export interface GlueJobInterface {
   Timeout: number;
   MaxRetries: number;
   SupportFiles: SupportFilesInterface[];
+  SecurityConfiguration?: string;
 }
