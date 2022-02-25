@@ -224,6 +224,11 @@ Only run `serverless deploy`
 
 
 
+## [2.6.0] - 2022-02-25
+
+### Add
+- Add support for SecurityConfiguration property
+
 ## [2.5.0] - 2022-02-14
 
 ### Add
