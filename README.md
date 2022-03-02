@@ -58,6 +58,7 @@ Glue:
       type: spark # spark / pythonshell # Required
       glueVersion: python3-2.0 # Required python3-1.0 | python3-2.0 | python2-1.0 | python2-0.9 | scala2-1.0 | scala2-0.9 | scala2-2.0
       role: arn:aws:iam::000000000:role/someRole # Required
+      MaxCapacity: 1 #Optional
       MaxConcurrentRuns: 3 # Optional
       WorkerType: Standard # Optional, G.1X | G.2X
       NumberOfWorkers: 1 # Optional
@@ -181,6 +182,7 @@ createBucketConfig|createBucketConfig| Bucket configuration for creation on S3 |
 |type|String|Indicate if the type of your job. Values can use are : `spark` or  `pythonshell`|true|
 |glueVersion|String|Indicate language and glue version to use ( `[language][version]-[glue version]`) the value can you use are: <ul><li>python3-1.0</li><li>python3-2.0</li><li>python2-1.0</li><li>python2-0.9</li><li>scala2-1.0</li><li>scala2-0.9</li><li>scala2-2.0</li></ul>|true|
 |role|String| arn role to execute job|true|
+|MaxCapacity|Double| The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs|false|
 |MaxConcurrentRuns|Double|max concurrent runs of the job|false|
 |MaxRetries|Int|Maximum number of retires in case of failure|False|
 |Timeout|Int|Job timeout in number of minutes|False|
