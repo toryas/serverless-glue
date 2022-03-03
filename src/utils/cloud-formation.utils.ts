@@ -16,6 +16,7 @@ export class CloudFormationUtils {
         Name: glueJob.name,
         Description: glueJob.Description,
         Role: glueJob.role,
+        MaxCapacity: glueJob.MaxCapacity,
         ExecutionProperty: {
           MaxConcurrentRuns: glueJob.MaxConcurrentRuns ?? 1,
         },

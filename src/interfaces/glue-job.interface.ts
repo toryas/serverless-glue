@@ -16,6 +16,7 @@ export interface GlueJobInterface {
     | "scala2-2.0";
   Description: string;
   role: string;
+  MaxCapacity?: number;
   MaxConcurrentRuns?: number;
   WorkerType?: "G.1X" | "G.2X" | "Standard";
   NumberOfWorkers?: number;
