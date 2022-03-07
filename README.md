@@ -226,6 +226,10 @@ Only run `serverless deploy`
 
 
 
+## [2.7.0] - 2022-02-25
+
+### Add
+- Add configuration MaxCapacity for job
 ## [2.6.0] - 2022-02-25
 
 ### Add
