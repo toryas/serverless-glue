@@ -4,10 +4,12 @@ Serverless-glue is an open source MIT licensed project, which has been able to g
 
 If you want to help me you can do it in the following ways:
 
-- With a donation through paypal [here](https://paypal.me/toryas).
+- With a donation through Paypal [here](https://paypal.me/toryas).
 - Sharing your feedback [here](https://github.com/toryas/serverless-glue/issues).
 
 I hope you liked this project and it is useful for you.
+
+Any problems? Join to the [slack channel](https://join.slack.com/t/serverless-glue/shared_invite/zt-14f50ztyb-Jdp8wRtVMlW7OriGBkG4oA).
 
 ---
 The principal changes are available [here](#changelog)
