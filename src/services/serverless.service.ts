@@ -61,8 +61,9 @@ export class ServerlessService {
           ...this.config.createBucketConfig,
         };
       }
-
-      await this.awsHelper.createBucket(params);
+      if(!this.awsHelper.existBucket(params)){
+        await this.awsHelper.createBucket(params);
+      }
     }
 
     for (const job of jobs) {

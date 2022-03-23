@@ -1,5 +1,4 @@
-import * as AWS from 'aws-sdk';
-
+import * as AWS from "aws-sdk";
 
 export class AwsHelper {
   credentials: AWS.Credentials;
@@ -29,7 +28,7 @@ export class AwsHelper {
 
   /**
    * create a S3 Bucket in AWS
-   * @param options 
+   * @param options
    */
   async createBucket(options: AWS.S3.CreateBucketRequest) {
     await this.s3.createBucket(options).promise();
@@ -37,11 +36,26 @@ export class AwsHelper {
 
   /**
    * Upload file to bucket
-   * @param options 
+   * @param options
    */
   async uploadFileToS3(options: AWS.S3.PutObjectRequest) {
-    if(!process.env.SLSGLUE_SKIP_UPLOADS){
+    if (!process.env.SLSGLUE_SKIP_UPLOADS) {
       await this.s3.upload(options).promise();
     }
+  }
+
+  existBucket(options: AWS.S3.CreateBucketRequest) {
+    let exist = false;
+    this.s3.headBucket({ Bucket: options.Bucket }, (err, data) => {
+      if (err) {
+        console.log(`Got an error, bucket ${options.Bucket} don't exist `)
+        exist = false;
+      } else {
+        console.log(`bucket ${options.Bucket} exist `)
+        console.log(data);
+        exist = true;
+      }
+    });
+    return exist;
   }
 }
