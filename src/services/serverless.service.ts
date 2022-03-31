@@ -61,8 +61,10 @@ export class ServerlessService {
           ...this.config.createBucketConfig,
         };
       }
-      if(!this.awsHelper.existBucket(params)){
+      if (!(await this.awsHelper.existBucket(params))) {
+        this.helperless.log("Bucket don't exist, I try to create it.");
         await this.awsHelper.createBucket(params);
+        this.helperless.log("Bucket created.");
       }
     }
 

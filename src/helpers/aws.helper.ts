@@ -1,4 +1,6 @@
+import { rejects } from "assert";
 import * as AWS from "aws-sdk";
+import { resolve } from "path";
 
 export class AwsHelper {
   credentials: AWS.Credentials;
@@ -45,17 +47,14 @@ export class AwsHelper {
   }
 
   existBucket(options: AWS.S3.CreateBucketRequest) {
-    let exist = false;
-    this.s3.headBucket({ Bucket: options.Bucket }, (err, data) => {
-      if (err) {
-        console.log(`Got an error, bucket ${options.Bucket} don't exist `)
-        exist = false;
-      } else {
-        console.log(`bucket ${options.Bucket} exist `)
-        console.log(data);
-        exist = true;
-      }
+    return new Promise((resolve, _rejects) => {
+      this.s3.headBucket({ Bucket: options.Bucket }, (err, data) => {
+        if (err) {
+          resolve(false);
+        } else {
+          resolve(true);
+        }
+      });
     });
-    return exist;
   }
 }
