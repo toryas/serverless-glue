@@ -228,6 +228,11 @@ Only run `serverless deploy`
 
 
 
+## [2.8.0] - 2022-03-31
+
+### Add
+
+- Add check if bucket exist before create it
 ## [2.7.0] - 2022-02-25
 
 ### Add
