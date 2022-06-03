@@ -1,31 +1,23 @@
-import { rejects } from "assert";
 import * as AWS from "aws-sdk";
-import { resolve } from "path";
 
 export class AwsHelper {
-  credentials: AWS.Credentials;
+  provider: any;
   s3: AWS.S3;
 
   constructor(serverless: any) {
-    this.credentials = AwsHelper.getAWSCredentials(serverless);
-    this.s3 = AwsHelper.makeS3service(this.credentials);
+    this.provider = serverless.getProvider("aws");
+    this.s3 = AwsHelper.makeS3service(this.provider);
   }
 
-  /**
-   * Return AWS credentials from serverless framework
-   * @param {Object} serverless Serverless Framework Object
-   */
-  static getAWSCredentials(serverless: any): AWS.Credentials {
-    let provider = serverless.getProvider("aws");
-    return provider.getCredentials().credentials;
-  }
 
   /**
    * Return a new S3 service
    * @param {*} credentials AWS Credentials
    */
-  static makeS3service(credentials: AWS.Credentials) {
-    return new AWS.S3({ credentials: credentials });
+  static makeS3service(provider: any) {
+    const credentials = provider.getCredentials().credentials;
+    const region = provider.options.region;
+    return new AWS.S3({ credentials: credentials, region: region });
   }
 
   /**

@@ -76,11 +76,13 @@ export class GlueJob implements GlueJobInterface {
     glueVersion:
       | "python3-1.0"
       | "python3-2.0"
+      | "python3-3.0"
       | "python2-1.0"
       | "python2-0.9"
       | "scala2-1.0"
       | "scala2-0.9"
       | "scala2-2.0"
+      | "scala3-3.0"
   ) {
     let parts = glueVersion.split("-");
     let pythonVersion = parts[0].match(/\d/)?.toString();

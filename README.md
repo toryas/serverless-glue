@@ -228,6 +228,18 @@ Only run `serverless deploy`
 
 
 
+## [2.9.0] - 2022-06-03
+
+### Add
+
+- Add support to Glue 3.0 (Spark 3.1.1/Python 3.7)
+- Now aws-s3 client is generated with region defined on "provider" part of serverless.yml
+
+### Fix
+
+- the hard coded path generator is replaced by the "path" package, to solve problems when running the package on Windows
+- the last "/" characters on `tempDirS3Prefix` are automatically removed to avoid wrong paths in S3 
+
 ## [2.8.0] - 2022-03-31
 
 ### Add

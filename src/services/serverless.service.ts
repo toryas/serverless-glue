@@ -10,6 +10,7 @@ import { GluePluginConfigInterface } from "../interfaces/glue-plugin-config.inte
 import { CloudFormationUtils } from "../utils/cloud-formation.utils";
 import { StringUtils } from "../utils/string.utils";
 import fs from "fs";
+import path from "path"
 
 export class ServerlessService {
   awsHelper: AwsHelper;
@@ -116,10 +117,10 @@ export class ServerlessService {
 
   async uploadJobScripts(job: GlueJob) {
     if (!this.config) throw new Error("Glue Config not found.");
-    const fileName = job.scriptPath.split("/").pop();
+    const fileName = path.parse(job.scriptPath).base;
     const params = {
       Bucket: this.config.bucketDeploy,
-      Body: readFileSync(`./${job.scriptPath}`),
+      Body: readFileSync(path.join(job.scriptPath)),
       Key: `${this.config?.s3Prefix}${fileName}`,
     };
     await this.awsHelper.uploadFileToS3(params);
