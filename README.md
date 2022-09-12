@@ -227,6 +227,10 @@ Only run `serverless deploy`
 <a name="changelog"></a>
 
 
+## [2.10.0] - 2022-09-12
+
+### Add
+ - Add support for python 3.9 shell jobs
 
 ## [2.9.0] - 2022-06-03
 
