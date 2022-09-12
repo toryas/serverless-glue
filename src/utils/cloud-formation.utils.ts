@@ -53,6 +53,7 @@ export class CloudFormationUtils {
           "--enable-spark-ui": glueJob.DefaultArguments?.enableSparkUi,
           "--spark-event-logs-path":
             glueJob.DefaultArguments?.sparkEventLogsPath,
+          "library-set": glueJob.DefaultArguments?.librarySet,
         },
         Tags: glueJob.Tags,
         Timeout: glueJob.Timeout,

@@ -8,13 +8,18 @@ export class GlueJob implements GlueJobInterface {
   tempDir?: boolean;
   type: "spark" | "pythonshell";
   glueVersion:
+    | "python3.9-1.0"
+    | "python3.9-2.0"
+    | "python3.9-3.0"
     | "python3-1.0"
     | "python3-2.0"
+    | "python3-3.0"
     | "python2-1.0"
     | "python2-0.9"
     | "scala2-1.0"
     | "scala2-0.9"
-    | "scala2-2.0";
+    | "scala2-2.0"
+    | "scala3-3.0";
   Description: string;
   role: string;
   MaxCapacity?:number;
@@ -74,6 +79,9 @@ export class GlueJob implements GlueJobInterface {
 
   setGlueVersion(
     glueVersion:
+      | "python3.9-1.0"
+      | "python3.9-2.0"
+      | "python3.9-3.0"
       | "python3-1.0"
       | "python3-2.0"
       | "python3-3.0"
@@ -85,7 +93,7 @@ export class GlueJob implements GlueJobInterface {
       | "scala3-3.0"
   ) {
     let parts = glueVersion.split("-");
-    let pythonVersion = parts[0].match(/\d/)?.toString();
+    let pythonVersion = parts[0].replace(/[A-Za-z]*/, '');
     let language = parts[0].match(/[A-Za-z]*/)?.toString();
     this.pythonVersion = pythonVersion;
     this.glueVersionJob = parts[1];

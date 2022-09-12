@@ -23,4 +23,5 @@ export interface DefaultArgumentsInterface {
   enableSparkUi?: string;
   sparkEventLogsPath?: string;
   customArguments?: Map<string,string>;
+  librarySet: string;
 }

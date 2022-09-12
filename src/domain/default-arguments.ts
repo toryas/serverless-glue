@@ -25,4 +25,5 @@ export class DefaultArguments implements DefaultArgumentsInterface {
   sparkEventLogsPath?: string | undefined;
   tempDir?: any;
   customArguments?: Map<string, string> | undefined;
+  librarySet: string | undefined;
 }

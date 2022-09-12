@@ -58,7 +58,7 @@ Glue:
       Description: # Optional, string
       tempDir: true # Optional true | false
       type: spark # spark / pythonshell # Required
-      glueVersion: python3-2.0 # Required python3-1.0 | python3-2.0 | python2-1.0 | python2-0.9 | scala2-1.0 | scala2-0.9 | scala2-2.0
+      glueVersion: python3-2.0 # Required "python3.9-1.0" | "python3.9-2.0" | "python3.9-3.0" | "python3-1.0" | "python3-2.0" | "python3-3.0" | "python2-1.0" | "python2-0.9" | "scala2-1.0" | "scala2-0.9" | "scala2-2.0" | "scala3-3.0"
       role: arn:aws:iam::000000000:role/someRole # Required
       MaxCapacity: 1 #Optional
       MaxConcurrentRuns: 3 # Optional
