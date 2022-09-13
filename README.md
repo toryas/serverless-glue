@@ -54,6 +54,7 @@ Glue:
   tempDirS3Prefix: some/s3/key/location/ # optional, default = ''. The job name will be appended to the prefix name
   jobs:
     - name: super-glue-job # Required
+      id: # Optional, string
       scriptPath: src/script.py # Required script will be named with the name after '/' and uploaded to s3Prefix location
       Description: # Optional, string
       tempDir: true # Optional true | false
@@ -178,6 +179,7 @@ createBucketConfig|createBucketConfig| Bucket configuration for creation on S3 |
 |Parameter|Type|Description|Required|
 |-|-|-|-|
 |name|String|name of job|true|
+|id|String|logical ID in CloudFormation for the job|false|
 |Description|String|Description of the job|False|
 |scriptPath|String|script path in the project|true|
 |tempDir|Boolean|flag indicate if job required a temp folder, if true plugin create a bucket for tmp|false|

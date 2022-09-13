@@ -3,6 +3,7 @@ import { SupportFilesInterface } from "./support-files.interface";
 
 export interface GlueJobInterface {
   name: string;
+  id?: string;
   scriptPath: string;
   tempDir?: boolean;
   type: "spark" | "pythonshell";
