@@ -229,6 +229,14 @@ Only run `serverless deploy`
 <a name="changelog"></a>
 
 
+## [2.11.1] - 2022-09-13
+
+### Add
+- Add support for custom logical IDs for jobs 
+
+### Fix
+- Fix Pascal Case generation for sections of names that are only numeric
+
 ## [2.10.0] - 2022-09-12
 
 ### Add
