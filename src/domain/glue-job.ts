@@ -4,6 +4,7 @@ import { SupportFilesInterface } from "../interfaces/support-files.interface";
 
 export class GlueJob implements GlueJobInterface {
   name: string;
+  id?: string;
   scriptPath: string;
   tempDir?: boolean;
   type: "spark" | "pythonshell";
@@ -42,6 +43,7 @@ export class GlueJob implements GlueJobInterface {
   constructor(job: GlueJobInterface) {
     this.DefaultArguments = job.DefaultArguments ?? {};
     this.name = job.name;
+    this.id = job.id;
     this.scriptPath = job.scriptPath;
     this.role = job.role;
     this.glueVersion = job.glueVersion;

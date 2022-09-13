@@ -72,10 +72,11 @@ export class ServerlessService {
     for (const job of jobs) {
       await this.uploadJobScripts(job);
       await this.uploadSupportFiles(job);
+      const jobCFId = job.id ?? StringUtils.toPascalCase(job.name);
       const jobCFTemplate = CloudFormationUtils.glueJobToCF(job);
       this.helperless.appendToTemplate(
         "resources",
-        StringUtils.toPascalCase(job.name),
+        jobCFId,
         jobCFTemplate
       );
     }
