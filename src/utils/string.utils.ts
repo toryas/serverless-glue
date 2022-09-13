@@ -1,6 +1,6 @@
 export class StringUtils {
   static toPascalCase(str: string) {
-    return str.toLowerCase().replace(/([-_ ][a-z])|(^[a-zA-Z])/g, (group) => {
+    return str.toLowerCase().replace(/([-_ ][a-z0-9])|(^[a-zA-Z])/g, (group) => {
       return group
         .toUpperCase()
         .replace("-", "")
