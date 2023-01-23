@@ -1,3 +1,6 @@
+### * Forked since original plugin doesn't support streaming jobs yet
+#### https://github.com/toryas/serverless-glue/issues/41
+
 # Serverless Glue
 
 Serverless-glue is an open source MIT licensed project, which has been able to grow thanks to the community. This project is the result of an idea that did not let it rest in oblivion and many hours of work after hours.
@@ -58,7 +61,7 @@ Glue:
       scriptPath: src/script.py # Required script will be named with the name after '/' and uploaded to s3Prefix location
       Description: # Optional, string
       tempDir: true # Optional true | false
-      type: spark # spark / pythonshell # Required
+      type: spark # spark / spark_streaming /pythonshell # Required
       glueVersion: python3-2.0 # Required "python3.9-1.0" | "python3.9-2.0" | "python3.9-3.0" | "python3-1.0" | "python3-2.0" | "python3-3.0" | "python2-1.0" | "python2-0.9" | "scala2-1.0" | "scala2-0.9" | "scala2-2.0" | "scala3-3.0"
       role: arn:aws:iam::000000000:role/someRole # Required
       MaxCapacity: 1 #Optional

@@ -73,7 +73,7 @@ export class CloudFormationUtils {
         Connections: glueJob.Connections,
       };
     }
-    if (glueJob.commandName === "glueetl") {
+    if (["glueetl", "gluestreaming"].indexOf(glueJob.commandName || '') !== -1) {
       if (glueJob.WorkerType) {
         cfn.Properties.WorkerType = glueJob.WorkerType;
       }

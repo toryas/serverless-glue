@@ -7,7 +7,7 @@ export class GlueJob implements GlueJobInterface {
   id?: string;
   scriptPath: string;
   tempDir?: boolean;
-  type: "spark" | "pythonshell";
+  type: "spark" | "spark_streaming" | "pythonshell";
   glueVersion:
     | "python3.9-1.0"
     | "python3.9-2.0"
@@ -29,7 +29,7 @@ export class GlueJob implements GlueJobInterface {
   NumberOfWorkers?: number | undefined;
   Connections?: string[] | undefined;
   scriptS3Location?: string;
-  commandName?: "glueetl" | "pythonshell";
+  commandName?: "glueetl" | "gluestreaming" |"pythonshell";
   pythonVersion?: string;
   glueVersionJob?: string;
   DefaultArguments: DefaultArgumentsInterface;
@@ -68,10 +68,13 @@ export class GlueJob implements GlueJobInterface {
     this.scriptS3Location = s3url;
   }
 
-  defineCommandName(type: "spark" | "pythonshell") {
+  defineCommandName(type: "spark" | "spark_streaming" | "pythonshell") {
     switch (type) {
       case "spark":
         this.commandName = "glueetl";
+        break;
+      case "spark_streaming":
+        this.commandName = "gluestreaming";
         break;
       case "pythonshell":
         this.commandName = "pythonshell";
