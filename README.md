@@ -1,6 +1,3 @@
-### * Forked since original plugin doesn't support streaming jobs yet
-#### https://github.com/toryas/serverless-glue/issues/41
-
 # Serverless Glue
 
 Serverless-glue is an open source MIT licensed project, which has been able to grow thanks to the community. This project is the result of an idea that did not let it rest in oblivion and many hours of work after hours.
