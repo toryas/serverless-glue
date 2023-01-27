@@ -1,4 +1,5 @@
 export interface DefaultArgumentsInterface {
+  additionalPythonModules?: string;
   jobLanguage?: string;
   tempDir?: any;
   class?: string;

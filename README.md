@@ -93,6 +93,7 @@ Glue:
         continuousLogConversionPattern: string # Optional
         enableSparkUi: string # Optional
         sparkEventLogsPath: string # Optional
+        additionalPythonModules: string # Optional
         customArguments: # Optional; these are user-specified custom default arguments that are passed into cloudformation with a leading -- (required for glue)
           custom_arg_1: custom_value
           custom_arg_2: other_custom_value

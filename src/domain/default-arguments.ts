@@ -1,6 +1,7 @@
 import { DefaultArgumentsInterface } from "../interfaces/default-arguments.interface";
 
 export class DefaultArguments implements DefaultArgumentsInterface {
+  additionalPythonModules?: string | undefined;
   jobLanguage?: string | undefined;
   class?: string | undefined;
   scriptLocation?: string | undefined;
