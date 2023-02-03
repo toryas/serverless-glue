@@ -122,7 +122,7 @@ export class ServerlessService {
     const params = {
       Bucket: this.config.bucketDeploy,
       Body: readFileSync(path.join(job.scriptPath)),
-      Key: `${this.config?.s3Prefix}${fileName}`,
+      Key: `${this.config?.s3Prefix ?? "glueJobs/"}${fileName}`,
     };
     await this.awsHelper.uploadFileToS3(params);
     job.setScriptS3Location(`s3://${params.Bucket}/${params.Key}`);
