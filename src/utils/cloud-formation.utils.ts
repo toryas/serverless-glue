@@ -21,6 +21,7 @@ export class CloudFormationUtils {
           MaxConcurrentRuns: glueJob.MaxConcurrentRuns ?? 1,
         },
         DefaultArguments: {
+          "--additional-python-modules": glueJob.DefaultArguments?.additionalPythonModules,
           "--job-language": glueJob.DefaultArguments?.jobLanguage,
           "--TempDir": glueJob.DefaultArguments?.tempDir ?? "",
           "--class": glueJob.DefaultArguments?.class,
