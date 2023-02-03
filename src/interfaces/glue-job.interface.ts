@@ -6,7 +6,7 @@ export interface GlueJobInterface {
   id?: string;
   scriptPath: string;
   tempDir?: boolean;
-  type: "spark" | "pythonshell";
+  type: "spark" | "spark_streaming" | "pythonshell";
   glueVersion:
     | "python3.9-1.0"
     | "python3.9-2.0"
@@ -28,7 +28,7 @@ export interface GlueJobInterface {
   NumberOfWorkers?: number;
   Connections?: string[];
   scriptS3Location?: string;
-  commandName?: "glueetl" | "pythonshell";
+  commandName?: "glueetl" | "gluestreaming" |"pythonshell";
   DefaultArguments: DefaultArgumentsInterface;
   Tags?: Map<string,string>;
   Timeout: number;
