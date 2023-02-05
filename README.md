@@ -184,7 +184,7 @@ createBucketConfig|createBucketConfig| Bucket configuration for creation on S3 |
 |Description|String|Description of the job|False|
 |scriptPath|String|script path in the project|true|
 |tempDir|Boolean|flag indicate if job required a temp folder, if true plugin create a bucket for tmp|false|
-|type|String|Indicate if the type of your job. Values can use are : `spark`, `spark_streaming` or  `pythonshell`|true|
+|type|String|Indicate if the type of your job. Values can use are : `spark`, `spark_streaming` or `pythonshell`|true|
 |glueVersion|String|Indicate language and glue version to use ( `[language][version]-[glue version]`) the value can you use are: <ul><li>python3-1.0</li><li>python3-2.0</li><li>python2-1.0</li><li>python2-0.9</li><li>scala2-1.0</li><li>scala2-0.9</li><li>scala2-2.0</li></ul>|true|
 |role|String| arn role to execute job|true|
 |MaxCapacity|Double| The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs|false|
