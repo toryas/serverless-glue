@@ -230,6 +230,16 @@ Only run `serverless deploy`
 <a name="changelog"></a>
 
 
+## [2.12.0] - 2023-02-09
+
+### Add
+- Add support for spark streams
+- Add support for `--additional-python-modules`
+
+### Fix
+
+- fix when  parametter `s3Prefix` is omitted generate a undefine prefix 
+
 ## [2.11.1] - 2022-09-13
 
 ### Add
