@@ -23,7 +23,6 @@ export class CloudFormationUtils {
         DefaultArguments: {
           "--additional-python-modules": glueJob.DefaultArguments?.additionalPythonModules,
           "--job-language": glueJob.DefaultArguments?.jobLanguage,
-          "--TempDir": glueJob.DefaultArguments?.tempDir ?? "",
           "--class": glueJob.DefaultArguments?.class,
           "--scriptLocation": glueJob.DefaultArguments?.scriptLocation,
           "--extra-py-files": glueJob.DefaultArguments?.extraPyFiles,
@@ -62,6 +61,12 @@ export class CloudFormationUtils {
         SecurityConfiguration: glueJob.SecurityConfiguration
       },
     };
+    if (glueJob.DefaultArguments?.tempDir) {
+      cfn.Properties.DefaultArguments = {
+        ...cfn.Properties.DefaultArguments,
+        "--TempDir": glueJob.DefaultArguments.tempDir,
+      }
+    }
     if (glueJob.DefaultArguments.customArguments) {
       const customArguments = CloudFormationUtils.parseCustomArguments(glueJob.DefaultArguments.customArguments);
       cfn.Properties.DefaultArguments = {
