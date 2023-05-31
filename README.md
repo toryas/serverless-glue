@@ -229,6 +229,10 @@ Only run `serverless deploy`
 # Changelog
 <a name="changelog"></a>
 
+## [2.12.1] - 2023-05-31
+
+### Fix
+- Fixed tempDir being added when set to false
 
 ## [2.12.0] - 2023-02-09
 
