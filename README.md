@@ -1,3 +1,12 @@
+
+# Read this first
+
+###############################################################################################
+I have been away from the world of Glue so it is difficult for me to maintain this plugin since I do not have an AWS account to test and improve the plugin. So if someone wants to keep making updates to the repository, talk to me internally to add it as a maintainer so I can publish new versions.
+
+Regards from Chile!
+###############################################################################################
+
 # Serverless Glue
 
 Serverless-glue is an open source MIT licensed project, which has been able to grow thanks to the community. This project is the result of an idea that did not let it rest in oblivion and many hours of work after hours.
