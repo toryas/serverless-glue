@@ -34,7 +34,7 @@ export class GlueHelper {
       this.config.tempDirS3Prefix = this.config.tempDirS3Prefix.split("/").filter(a=>a!="").join("/");
       jobTempDirS3Prefix += `/${this.config.tempDirS3Prefix}`;
     }
-    jobTempDirS3Prefix += `/${glueJob.name}`;
+    jobTempDirS3Prefix += `/${glueJob.name}/`;
 
     glueJob.DefaultArguments.tempDir = {
       "Fn::Join": ["", ["s3://", jobTempDirBucket, jobTempDirS3Prefix]],
