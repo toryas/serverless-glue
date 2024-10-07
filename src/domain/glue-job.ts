@@ -2,43 +2,49 @@ import { DefaultArgumentsInterface } from "../interfaces/default-arguments.inter
 import { GlueJobInterface } from "../interfaces/glue-job.interface";
 import { SupportFilesInterface } from "../interfaces/support-files.interface";
 
+export const GlueVersions = [
+  "python3.9-1.0",
+  "python3.9-2.0",
+  "python3.9-3.0",
+  "python3-4.0",
+  "python3-1.0",
+  "python3-2.0",
+  "python3-3.0",
+  "python2-1.0",
+  "python2-0.9",
+  "scala2-1.0",
+  "scala2-0.9",
+  "scala2-2.0",
+  "scala3-3.0"
+] as const;
+
+export type GlueVersionType = typeof GlueVersions[number];
+
 export class GlueJob implements GlueJobInterface {
   name: string;
   id?: string;
   scriptPath: string;
   tempDir?: boolean;
   type: "spark" | "spark_streaming" | "pythonshell";
-  glueVersion:
-    | "python3.9-1.0"
-    | "python3.9-2.0"
-    | "python3.9-3.0"
-    | "python3-1.0"
-    | "python3-2.0"
-    | "python3-3.0"
-    | "python2-1.0"
-    | "python2-0.9"
-    | "scala2-1.0"
-    | "scala2-0.9"
-    | "scala2-2.0"
-    | "scala3-3.0";
+  glueVersion: GlueVersionType;
   Description: string;
   role: string;
-  MaxCapacity?:number;
+  MaxCapacity?: number;
   MaxConcurrentRuns?: number;
   WorkerType?: "G.1X" | "G.2X" | "Standard" | undefined;
   NumberOfWorkers?: number | undefined;
   Connections?: string[] | undefined;
   scriptS3Location?: string;
-  commandName?: "glueetl" | "gluestreaming" |"pythonshell";
+  commandName?: "glueetl" | "gluestreaming" | "pythonshell";
   pythonVersion?: string;
   glueVersionJob?: string;
   DefaultArguments: DefaultArgumentsInterface;
-  Tags?: Map<string,string>;
+  Tags?: Map<string, string>;
   Timeout: number;
   MaxRetries: number;
   SupportFiles: SupportFilesInterface[];
   SecurityConfiguration?: string;
-  
+
 
   constructor(job: GlueJobInterface) {
     this.DefaultArguments = job.DefaultArguments ?? {};
@@ -82,21 +88,7 @@ export class GlueJob implements GlueJobInterface {
     }
   }
 
-  setGlueVersion(
-    glueVersion:
-      | "python3.9-1.0"
-      | "python3.9-2.0"
-      | "python3.9-3.0"
-      | "python3-1.0"
-      | "python3-2.0"
-      | "python3-3.0"
-      | "python2-1.0"
-      | "python2-0.9"
-      | "scala2-1.0"
-      | "scala2-0.9"
-      | "scala2-2.0"
-      | "scala3-3.0"
-  ) {
+  setGlueVersion(glueVersion: GlueVersionType) {
     let parts = glueVersion.split("-");
     let pythonVersion = parts[0].replace(/[A-Za-z]*/, '');
     let language = parts[0].match(/[A-Za-z]*/)?.toString();
