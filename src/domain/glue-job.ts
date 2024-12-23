@@ -44,6 +44,7 @@ export class GlueJob implements GlueJobInterface {
   MaxRetries: number;
   SupportFiles: SupportFilesInterface[];
   SecurityConfiguration?: string;
+  jobRunQueuingEnabled?: boolean;
 
 
   constructor(job: GlueJobInterface) {
@@ -68,6 +69,7 @@ export class GlueJob implements GlueJobInterface {
     this.MaxRetries = job.MaxRetries;
     this.SupportFiles = job.SupportFiles;
     this.SecurityConfiguration = job.SecurityConfiguration;
+    this.jobRunQueuingEnabled = job.jobRunQueuingEnabled;
   }
 
   setScriptS3Location(s3url: string) {

@@ -87,6 +87,9 @@ export class CloudFormationUtils {
         cfn.Properties.NumberOfWorkers = glueJob.NumberOfWorkers;
       }
     }
+    if (glueJob.jobRunQueuingEnabled !== undefined) {
+      cfn.Properties.JobRunQueuingEnabled = glueJob.jobRunQueuingEnabled;
+    }
 
     return cfn;
   }
