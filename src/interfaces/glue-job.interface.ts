@@ -24,4 +24,5 @@ export interface GlueJobInterface {
   MaxRetries: number;
   SupportFiles: SupportFilesInterface[];
   SecurityConfiguration?: string;
+  JobRunQueuingEnabled?: boolean;
 }
