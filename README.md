@@ -239,6 +239,16 @@ Only run `serverless deploy`
 # Changelog
 <a name="changelog"></a>
 
+## [2.14.0] - 2025-02-13
+
+### Add
+- included job queuing feature [#59](https://github.com/toryas/serverless-glue/pull/59)
+
+## [2.13.0] - 2024-12-09
+
+### Add
+- allow glue v4.0 [#58](https://github.com/toryas/serverless-glue/pull/58)
+
 ## [2.12.1] - 2023-05-31
 
 ### Fix
