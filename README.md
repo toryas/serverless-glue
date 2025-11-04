@@ -96,6 +96,7 @@ Glue:
         enableRenameAlgorithmV2: string # Optional
         enableGlueDatacatalog: string # Optional
         enableMetrics: string # Optional
+        enableObservabilityMetrics: string # Optional
         enableContinuousCloudwatchLog: string # Optional
         enableContinuousLogFilter: string # Optional
         continuousLogLogGroup: string # Optional

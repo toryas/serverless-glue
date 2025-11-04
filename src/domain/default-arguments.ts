@@ -17,6 +17,7 @@ export class DefaultArguments implements DefaultArgumentsInterface {
   enableRenameAlgorithmV2?: string | undefined;
   enableGlueDatacatalog?: string | undefined;
   enableMetrics?: string | undefined;
+  enableObservabilityMetrics?: string | undefined;
   enableContinuousCloudwatchLog?: string | undefined;
   enableContinuousLogFilter?: string | undefined;
   continuousLogLogGroup?: string | undefined;

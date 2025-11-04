@@ -40,6 +40,8 @@ export class CloudFormationUtils {
           "--enable-glue-datacatalog":
             glueJob.DefaultArguments?.enableGlueDatacatalog,
           "--enable-metrics": glueJob.DefaultArguments?.enableMetrics,
+          "--enable-observability-metrics": 
+            glueJob.DefaultArguments?.enableObservabilityMetrics,
           "--enable-continuous-cloudwatch-log":
             glueJob.DefaultArguments?.enableContinuousCloudwatchLog,
           "--enable-continuous-log-filter":
