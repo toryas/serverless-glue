@@ -16,6 +16,7 @@ export interface DefaultArgumentsInterface {
   enableRenameAlgorithmV2?: string;
   enableGlueDatacatalog?: string;
   enableMetrics?: string;
+  enableObservabilityMetrics?: string;
   enableContinuousCloudwatchLog?: string;
   enableContinuousLogFilter?: string;
   continuousLogLogGroup?: string;
