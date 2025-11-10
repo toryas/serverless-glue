@@ -240,6 +240,11 @@ Only run `serverless deploy`
 # Changelog
 <a name="changelog"></a>
 
+## [2.15.0] - 2025-11-10
+
+### Add
+- add enable-observability-metrics to DefaultArguments [#66](https://github.com/toryas/serverless-glue/pull/63)
+
 ## [2.14.0] - 2025-02-13
 
 ### Add
